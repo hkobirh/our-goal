@@ -33,15 +33,22 @@
             </a>
         </li>
         <li>
-            <a href="#" class="has-arrow">
-                <div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i></div>
-                <div class="menu-title">Items</div>
+            <a href="{{ route('staff.product.index') }}">
+                <div class="parent-icon icon-color-1"><i class="bx bx-list-ol"></i></div>
+                <div class="menu-title">Products</div>
             </a>
-            <ul>
-                <li><a href="{{route('staff.brand.create')}}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a></li>
-                <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Manage Brands</a></li>
-            </ul>
         </li>
+
+{{--        <li>--}}
+{{--            <a href="#" class="has-arrow">--}}
+{{--                <div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i></div>--}}
+{{--                <div class="menu-title">Items</div>--}}
+{{--            </a>--}}
+{{--            <ul>--}}
+{{--                <li><a href="{{route('staff.brand.create')}}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a></li>--}}
+{{--                <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Manage Brands</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
     </ul>
     <!--end navigation-->
 </div>

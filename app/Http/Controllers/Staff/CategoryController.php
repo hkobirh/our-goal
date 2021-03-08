@@ -52,7 +52,7 @@ class CategoryController extends Controller
             'slug'=>slugify(request()->name),
             'create_by'=>auth()->user()->id,
         ]);
-        setMessage('success','Brand created successfully !');
+        setMessage('success','Category created successfully !');
         return redirect()->back();
     }
 

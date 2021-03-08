@@ -1,0 +1,39 @@
+[
+    {
+        "name": "Sony Plus",
+        "slug": "sony-plus",
+        "status": "active",
+        "create_by": "1"
+    },
+
+    {
+        "name": "Samsung Bangladesh",
+        "slug": "samsung-bangladesh",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Sony",
+        "slug": "sony",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Walton",
+        "slug": "walton",
+        "status": "inactive",
+        "create_by": "1"
+    },
+    {
+        "name": "Singer Plus",
+        "slug": "singer-plus",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Symphony",
+        "slug": "symphony",
+        "status": "active",
+        "create_by": "1"
+    }
+]

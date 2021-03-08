@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>@yield('title')-Our Business Site</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--favicon-->
     <link rel="icon" href="{{asset('theme/backend/assets/images/favicon-32x32.png" type="image/png')}}" />
     <link href="{{asset('theme/backend/assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
@@ -56,7 +57,7 @@
     <!--End Back To Top Button-->
    @include('backend.components.footer')
 </div>
-
+@csrf
 <!-- JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{asset('theme/backend/assets/js/jquery.min.js')}}"></script>
@@ -79,9 +80,7 @@
 <script src="{{asset('theme/backend/assets/js/index2.js')}}"></script>
 <!-- App JS -->
 <script src="{{asset('theme/backend/assets/js/app.js')}}"></script>
-<script>
-  $('#myDatatable').DataTable();
-</script>
+<script src="{{asset('theme/backend/assets/js/custom.js')}}"></script>
 </body>
 
 </html>

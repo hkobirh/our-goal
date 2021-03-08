@@ -19,7 +19,7 @@ class CategorySeeder extends Seeder
         foreach (range(1,30) as $index){
             $name = $faker->name;
             Category::create([
-                'root'=> rand(0, 9),
+                'root'=> rand(0,5),
                 'name'=> $name,
                 'slug'=> slugify($name),
                 'status'=> $this->rendomStatus(),

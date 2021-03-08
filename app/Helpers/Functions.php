@@ -31,3 +31,24 @@ function setMessage($type,$message)
     session()->flash('type',$type);
     session()->flash('message',$message);
 }
+function categories_select_data($categories,$loop=''){
+    $output = '';
+    foreach ($categories as $category){
+        $output .= '<option value="'.$category->id.'">'.$category->name.'</option>';
+        if(count($category->sub_category)){
+            foreach ($category->sub_category as $sub){
+                $output .= '<option value="'.$sub->id.'">'.$category->name.'>'.$sub->name.'</option>';
+                if($loop===3){
+                    if(count($sub->sub_category)){
+                        foreach ($sub->sub_category as $sub1){
+                            $output .= '<option value="'.$sub1->id.'">'.$category->name.'>'.$sub->name.'>'.$sub1->name.'</option>';
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return $output;
+}
+
+

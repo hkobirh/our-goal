@@ -110,7 +110,7 @@
                     <tr>
                         <td>
                             <div class="product-img bg-transparent border">
-                                <img src="assets/images/icons/smartphone.png" width="35" alt="">
+                                <img src="{{asset('theme/backend/assets/images/icons/smartphone.png')}}" width="35" alt="">
                             </div>
                         </td>
                         <td>Honor Mobile 7x</td>
@@ -123,7 +123,7 @@
                     <tr>
                         <td>
                             <div class="product-img bg-transparent border">
-                                <img src="assets/images/icons/watch.png" width="35" alt="">
+                                <img src="{{asset('theme/backend/assets/images/icons/watch.png')}}" width="35" alt="">
                             </div>
                         </td>
                         <td>Hand Watch</td>
@@ -136,7 +136,7 @@
                     <tr>
                         <td>
                             <div class="product-img bg-transparent border">
-                                <img src="assets/images/icons/laptop.png" width="35" alt="">
+                                <img src="{{asset('theme/backend/assets/images/icons/laptop.png')}}" width="35" alt="">
                             </div>
                         </td>
                         <td>Mini Laptop</td>
@@ -149,7 +149,7 @@
                     <tr>
                         <td>
                             <div class="product-img bg-transparent border">
-                                <img src="assets/images/icons/shirt.png" width="35" alt="">
+                                <img src="{{asset('theme/backend/assets/images/icons/shirt.png')}}" width="35" alt="">
                             </div>
                         </td>
                         <td>Slim-T-Shirt</td>
