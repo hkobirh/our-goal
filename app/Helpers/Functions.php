@@ -51,4 +51,71 @@ function categories_select_data($categories,$loop=''){
     return $output;
 }
 
+// Color
+function color()
+{
+    return [
+        'Red' => 'Red',
+        'Green' => 'Green',
+        'Blue' => 'Blue',
+        'Pink' => 'Pink',
+        'White' => 'White',
+        'Black' => 'Black',
+        'Maroon' => 'Maroon',
+        'Gold' => 'Gold',
+        'Yellow' => 'Yellow',
+        // 'Orange' => 'Orange',
+    ];
+}
+// Size
+function size()
+{
+    return [
+        'S' => 'S',
+        'M' => 'M',
+        'L' => 'L',
+        'XL' => 'XL',
+        'XXL' => 'XXL',
+        // '6' => '1GB RAM',
+        // '7' => '2GB RAM',
+        // '8' => '4GB RAM',
+        // '9' => '6GB RAM',
+        // '10' => '8GB RAM',
+        // '11' => '10GB RAM',
+        // '12' => '12GB RAM',
+        // '13' => '16GB RAM',
+    ];
+}
+
+// gender
+function gender()
+{
+    return [
+        '1' => 'Male',
+        '2' => 'female',
+        '3' => 'Other',
+    ];
+}
+// Marital Status
+function marital_status()
+{
+    return [
+        '1' => 'Single',
+        '2' => 'Married',
+        '3' => 'Widowed',
+        '4' => 'Divorced',
+    ];
+}
+
+// religions
+function religions()
+{
+    return [
+        '1' => 'Islam',
+        '2' => 'Christianity',
+        '3' => 'Hindu',
+        '4' => 'Buddha',
+    ];
+}
+
 

@@ -22,12 +22,14 @@
     <script src="{{asset('theme/backend/assets/js/pace.min.js')}}"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('theme/backend/assets/css/sweetalert2.min.css')}}">
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/icons.css')}}" />
     <!-- App CSS -->
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/app.css')}}" />
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/dark-sidebar.css')}}" />
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/dark-theme.css')}}" />
+    <link rel="stylesheet" href="{{asset('theme/backend/assets/css/jquery-ui.min.css')}}" />
 </head>
 
 <body>
@@ -78,8 +80,11 @@
 <script src="{{asset('theme/backend/assets/plugins/vectormap/jquery-jvectormap-au-mill.js')}}"></script>
 <script src="{{asset('theme/backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
 <script src="{{asset('theme/backend/assets/js/index2.js')}}"></script>
+<script src="{{asset('theme/backend/assets/js/sweetalert2.all.min.js')}}"></script>
 <!-- App JS -->
 <script src="{{asset('theme/backend/assets/js/app.js')}}"></script>
+<script src="{{asset('theme/backend/assets/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('theme/backend/assets/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('theme/backend/assets/js/custom.js')}}"></script>
 </body>
 

@@ -44,7 +44,8 @@ class ProductController extends Controller
             'name'=>'required',
             'category'=>'required',
             'brand'=>'required',
-            'model'=>'required'
+            'model'=>'required',
+            'status'=>'required'
         ]);
         if($validator->fails()){
             return response()->json([
