@@ -42,7 +42,7 @@
                         <ul></ul>
                     </div>
                     <x-show-message></x-show-message>
-                    <form class="create-product" action="{{route('staff.product.update',$product->id)}}" method="POST"
+                    <form class="update-product" action="{{route('staff.product.update',$product->id)}}" method="POST"
                           enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="form-row">
@@ -197,13 +197,17 @@
                                     <label> Product Thumbnail : </label><br>
                                     <input id="thumbnail" type="file" name="thumbnail">
                                     <div class="thumbnail ml-2 mt-2">
-                                        <img src="{{asset('public/uploads/products/'.$product->thumbnail)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
+                                        <img src="{{asset('uploads/products/'.$product->thumbnail)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
                                     </div>
                                 </div>
                                 <div class=" form-group col-md-6 ">
                                     <label> Product Image : </label><br>
                                     <input id="image" type="file" name="image[]" multiple>
-                                    <div class="product-gallery ml-2 mt-2"></div>
+                                    <div class="product-gallery ml-2 mt-2">
+                                        @foreach(json_decode($product->image) as $image)
+                                        <img src="{{asset('uploads/products/'.$image)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class=" form-row ">

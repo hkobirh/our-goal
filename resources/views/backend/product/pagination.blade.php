@@ -20,7 +20,7 @@
         <tr class="tr{{$row->id}}">
             <td>
                 <div class="product-img bg-transparent border">
-                    <img src="{{$row->thumbnail}}" style="width: 50px">
+                    <img src="{{asset('uploads/products/'.$row->thumbnail)}}" style="width: 35px">
                 </div>
             </td>
             <td>{{$row->name}}</td>
@@ -32,7 +32,7 @@
             <td>{{$row->special_price}}</td>
             <td>
                 <span class="badge badge-{{$row->status == 'Active'?'info':'danger'}}">{{$row->status}}
-                </span> 
+                </span>
             </td>
             <td>{{$row->user->name}}</td>
             <td>
