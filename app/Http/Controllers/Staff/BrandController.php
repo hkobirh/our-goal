@@ -14,8 +14,9 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  $brands = Brand::with('user')->select('id','name','slug','create_by','status')->get();
-       return view('backend.brands.manage',compact('brands'));
+    {
+        $brands = Brand::with('user')->select('id', 'name', 'slug', 'create_by', 'status')->get();
+        return view('backend.brands.manage', compact('brands'));
     }
 
     /**
@@ -31,29 +32,29 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $brand = $request->validate([
-            'name'=>'required|min:2|max:10',
-            'status'=>'required'
+            'name' => 'required|min:2|max:10',
+            'status' => 'required'
         ]);
         Brand::create([
-            'name'=>request()->input('name'),
-            'status'=>request()->input('status'),
-            'slug'=>slugify(request()->name),
-            'create_by'=>auth()->user()->id,
+            'name' => request()->input('name'),
+            'status' => request()->input('status'),
+            'slug' => slugify(request()->name),
+            'create_by' => auth()->user()->id,
         ]);
-        setMessage('success','Brand created successfully !');
+        setMessage('success', 'Brand created successfully !');
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,28 +65,28 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $brand = Brand::find($id);
-        return view('backend.brands.edit',compact('brand'));
+        return view('backend.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $brand = Brand::find($id);
         $request->validate([
-            'name'=>'required|min:2|max:10',
-            'status'=>'required'
+            'name' => 'required|min:2|max:10',
+            'status' => 'required'
         ]);
         try {
             $brand->name = $request->name;
@@ -94,10 +95,10 @@ class BrandController extends Controller
             $brand->create_by = auth()->user()->id;
             $brand->update();
 
-            setMessage('success','Brand update success !');
+            setMessage('success', 'Brand update success !');
 
-        }catch (Exception $e){
-            setMessage('danger','Somthing wrong !');
+        } catch (Exception $e) {
+            setMessage('danger', 'Somthing wrong !');
         }
         return redirect()->back();
 
@@ -106,14 +107,14 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $brand = Brand::find($id);
         $brand->delete();
-        session()->flash('success','Yay! A Brand has been successfully deleted.');
+        session()->flash('success', 'Yay! A Brand has been successfully deleted.');
         return redirect()->back();
     }
 }

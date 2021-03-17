@@ -1,20 +1,21 @@
-
 <!--header-->
 <header class="top-header">
     <nav class="navbar navbar-expand">
         <div class="left-topbar d-flex align-items-center">
-            <a href="javascript:;" class="toggle-btn">	<i class="bx bx-menu"></i>
+            <a href="javascript:;" class="toggle-btn"> <i class="bx bx-menu"></i>
             </a>
         </div>
         <div class="m-lg-2"><h3>The best Business Site</h3></div>
         <div class="right-topbar ml-auto">
             <ul class="navbar-nav">
                 <li class="nav-item search-btn-mobile">
-                    <a class="nav-link position-relative" href="javascript:;">	<i class="bx bx-search vertical-align-middle"></i>
+                    <a class="nav-link position-relative" href="javascript:;"> <i
+                            class="bx bx-search vertical-align-middle"></i>
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-lg">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-toggle="dropdown">	<i class="bx bx-bell vertical-align-middle"></i>
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;"
+                       data-toggle="dropdown"> <i class="bx bx-bell vertical-align-middle"></i>
                         <span class="msg-count">8</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -82,7 +83,8 @@
                             </a>
                             <a class="dropdown-item" href="javascript:;">
                                 <div class="media align-items-center">
-                                    <div class="notify bg-light-warning text-warning"><i class="bx bx-message-detail"></i>
+                                    <div class="notify bg-light-warning text-warning"><i
+                                            class="bx bx-message-detail"></i>
                                     </div>
                                     <div class="media-body">
                                         <h6 class="msg-name">New Comments <span class="msg-time float-right">4 hrs
@@ -131,20 +133,24 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown dropdown-user-profile">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
+                       data-toggle="dropdown">
                         <div class="media user-box align-items-center">
                             <div class="media-body user-info">
                                 <p class="user-name mb-0">{{auth()->user()->name}}</p>
                                 <p class="designattion mb-0">{{auth()->user()->email}}</p>
                             </div>
-                            <img src="{{asset('theme/backend/assets/images/avatars/avatar-1.png')}}" class="user-img" alt="user avatar">
+                            <img src="{{asset('theme/backend/assets/images/avatars/avatar-1.png')}}" class="user-img"
+                                 alt="user avatar">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
                         <form action="{{route('staff.logout')}}" method="post">
                             @csrf
-                            <a class="dropdown-item" href="{{route('staff.logout')}}" onclick="event.preventDefault();this.closest('form').submit();"><i class="bx bx-power-off"></i><span>Logout</span></a>
+                            <a class="dropdown-item" href="{{route('staff.logout')}}"
+                               onclick="event.preventDefault();this.closest('form').submit();"><i
+                                    class="bx bx-power-off"></i><span>Logout</span></a>
                         </form>
                     </div>
                 </li>

@@ -31,14 +31,14 @@ function setMessage($type,$message)
     session()->flash('type',$type);
     session()->flash('message',$message);
 }
-function categories_select_data($categories,$loop=''){
+function categories_select_data($categories,$lavel='',$selected=''){
     $output = '';
     foreach ($categories as $category){
         $output .= '<option value="'.$category->id.'">'.$category->name.'</option>';
         if(count($category->sub_category)){
             foreach ($category->sub_category as $sub){
                 $output .= '<option value="'.$sub->id.'">'.$category->name.'>'.$sub->name.'</option>';
-                if($loop===3){
+                if($lavel===3){
                     if(count($sub->sub_category)){
                         foreach ($sub->sub_category as $sub1){
                             $output .= '<option value="'.$sub1->id.'">'.$category->name.'>'.$sub->name.'>'.$sub1->name.'</option>';
@@ -76,14 +76,6 @@ function size()
         'L' => 'L',
         'XL' => 'XL',
         'XXL' => 'XXL',
-        // '6' => '1GB RAM',
-        // '7' => '2GB RAM',
-        // '8' => '4GB RAM',
-        // '9' => '6GB RAM',
-        // '10' => '8GB RAM',
-        // '11' => '10GB RAM',
-        // '12' => '12GB RAM',
-        // '13' => '16GB RAM',
     ];
 }
 

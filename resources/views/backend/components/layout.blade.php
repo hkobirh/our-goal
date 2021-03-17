@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/dark-sidebar.css')}}" />
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/dark-theme.css')}}" />
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/jquery-ui.min.css')}}" />
+    <script>
+        const baseUrl = '{{ URL::to('/') }}';
+    </script>
 </head>
 
 <body>
@@ -69,6 +72,7 @@
 <script src="{{asset('theme/backend/assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
 <script src="{{asset('theme/backend/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('theme/backend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('theme/backend/assets/ckeditor/ckeditor.js')}}"></script>
 <!--Data Tables js-->
 <script src="{{asset('theme/backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <!-- Vector map JavaScript -->
@@ -83,9 +87,9 @@
 <script src="{{asset('theme/backend/assets/js/sweetalert2.all.min.js')}}"></script>
 <!-- App JS -->
 <script src="{{asset('theme/backend/assets/js/app.js')}}"></script>
-<script src="{{asset('theme/backend/assets/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('theme/backend/assets/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('theme/backend/assets/js/custom.js')}}"></script>
+@yield('java')
 </body>
 
 </html>

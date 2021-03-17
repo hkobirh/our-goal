@@ -1,34 +1,40 @@
-$(document).ready(function (){
+$(document).ready(function () {
 
     $('#myDatatable').DataTable({
-        ordering:false
+        ordering: false
     });
 
     $.ajaxSetup({
-        headers:{
+        headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
 
-    $('body').on('submit', '.create-product', function(e){
-          e.preventDefault();
+    $('body').on('submit', '.create-product', function (e) {
+        e.preventDefault();
         $.ajax({
-            url: '/staff/product',
+            url: baseUrl + '/staff/product',
             method: 'POST',
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            data: new FormData(this),
             success: function (data) {
-               if($.isEmptyObject(data.error)){
-                   $('.error-message').css('display','none');
-                   $('.success-message').html(data.success).css('display','block');
-                   $('.create-product')[0].reset();
+                if ($.isEmptyObject(data.error)) {
+                    $('.error-message').css('display', 'none');
+                    $('.success-message').html(data.success).css('display', 'block');
+                    $('.create-product')[0].reset();
+                    $('#specialoffershow').css('display', 'none');
+                    $('#warrantyshow').css('display', 'none');
+                    $('.product-gallery').empty();
 
-                   Toast.fire({
-                       icon: 'success',
-                       title: 'Signed in successfully'
-                   })
-               }else {
-                   showErrorMessage(data.error)
-               }
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'A product create successfully.'
+                    })
+                } else {
+                    showErrorMessage(data.error)
+                }
             }
         })
     })
@@ -36,11 +42,11 @@ $(document).ready(function (){
 
 })
 
-function showErrorMessage(message){
-    $('.error-message').css('display','block').find('ul').html('');
-   $.each(message, function (key, value){
-       $('.error-message').find('ul').append('<li>'+value+'</li>');
-   });
+function showErrorMessage(message) {
+    $('.error-message').css('display', 'block').find('ul').html('');
+    $.each(message, function (key, value) {
+        $('.error-message').find('ul').append('<li>' + value + '</li>');
+    });
 }
 
 
@@ -52,8 +58,8 @@ const Toast = Swal.mixin({
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
 
@@ -62,6 +68,7 @@ function specialoffer(chkspecialoffer) {
     var specialoffershow = document.getElementById("specialoffershow");
     specialoffershow.style.display = chkspecialoffer.checked ? "" : "none";
 }
+
 // warrantys how
 function warrantyshow(warrantyhidden) {
     var warrantyshow = document.getElementById("warrantyshow");
@@ -83,14 +90,14 @@ function convertToSlug(text, place) {
 
 // image preview
 
-$(function() {
+$(function () {
     // Multiple images preview in browser
-    var imagesPreview = function(input, placeToInsertImagePreview) {
+    var imagesPreview = function (input, placeToInsertImagePreview) {
         if (input.files) {
             var filesAmount = input.files.length;
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     $(
                         $.parseHTML('<img class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">')
                     ).attr("src", event.target.result).appendTo(placeToInsertImagePreview);
@@ -100,17 +107,17 @@ $(function() {
         }
     };
 
-    $("body").on("change", "#image", function() {
-        imagesPreview(this, "div.product-image")
+    $("body").on("change", "#image", function () {
+        imagesPreview(this, "div.product-gallery")
     });
-    $("body").on("change", "#thumbnail", function() {
+    $("body").on("change", "#thumbnail", function () {
         imagesPreview(this, "div.thumbnail");
     });
 
-    $("body").on("change", "#peofile_image", function(e) {
+    $("body").on("change", "#peofile_image", function (e) {
         imagesPreview(this, ".pimage").attr("src", e.target.result);
     });
-    $("body").on("change", "#image", function(e) {
+    $("body").on("change", "#image", function (e) {
         imagesPreview(this, "#brand-image").attr("src", e.target.result);
     });
 });
@@ -121,4 +128,65 @@ $(".input").datepicker({
     autoSize: true
 });
 
+//Pagination js
+
+$('body').on('click', '.pagination .page-link', function () {
+    event.preventDefault();
+    let url = $(this).attr('href');
+    let page = url.split('page=')[1];
+
+    pageData(page);
+})
+
+function pageData(page) {
+    let url = $('#paginationTable').data('url');
+    token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: {_token: token, page: page},
+        success: function (result) {
+            $('#paginationTable').html(result);
+        }
+    })
+}
+
+//Remove Item
+$('body').on('click', '.remove-item', function () {
+    let url = $(this).data('url');
+    let id = $(this).data('id');
+    let page = $('.page-item.active .page-link').html();
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                    url: url,
+                    type: 'delete',
+                    success: function (result) {
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        pageData(page);
+                        $('.tr' + id).empty();
+                    }
+                }
+            )
+
+        }
+    })
+
+
+})
 

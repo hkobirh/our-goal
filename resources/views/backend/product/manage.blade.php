@@ -14,40 +14,27 @@
         </div>
         <div class="ml-auto">
             <div class="btn-group">
-                <a href="{{route('staff.product.create')}}" class="btn btn-info ml-1"> <i class="bx bx-plus-circle mr-1"></i> Add Product</a>
+                <a href="{{route('staff.product.create')}}" class="btn btn-info ml-1"> <i
+                        class="bx bx-plus-circle mr-1"></i> Add Product</a>
             </div>
         </div>
     </div>
 
 
-<x-show-message></x-show-message>
+    <x-show-message></x-show-message>
 
-<div class="card">
-    <div class="card-body">
-        <div class="card-title">
-            <h4 class="mb-0">Manage Product</h4>
-        </div>
-        <hr/>
-        <div class="table-responsive">
-            <table id="myDatatable" class="table table-striped table-bordered" style="width:100%">
-                <thead class="text-center">
-                <tr>
-                    <th>SL NO</th>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Status</th>
-                    <th>Create by</th>
-                    <th style="width: 100px">Action</th>
-                </tr>
-                </thead>
-                <tbody class="text-center">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
 
-                </tbody>
-            </table>
+                <h4 class="mb-0">Manage Product</h4>
+            </div>
+            <hr/>
+            <div id="paginationTable" data-url="{{route('staff.product.fetch.data')}}">
+                @include('backend.product.pagination')
+            </div>
         </div>
     </div>
-</div>
-
 
 
 @endsection

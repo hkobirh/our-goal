@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Staff\DashboardController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use App\Http\Controllers\Staff\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test',[TestController::class,'index']);
+Route::post('/test',[TestController::class,'get_data'])->name('get_data');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/backend.php';

@@ -1,5 +1,5 @@
 @extends('backend.components.layout')
-@section('title','Update category')
+@section('title','Update Product')
 
 @section('content')
     <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
@@ -9,75 +9,235 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Update Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Update Product</li>
                 </ol>
             </nav>
         </div>
         <div class="ml-auto">
             <div class="btn-group">
-                <a href="" class="btn btn-info ml-1"> <i class="bx bx-plus-circle mr-1"></i> Manage category</a>
+                <a href="" class="btn btn-info ml-1"> <i class="bx bx-plus-circle mr-1"></i> Add Product</a>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 col-lg-9 mx-auto">
-            @if(session()->has('type') && session()->has('message'))
-                <div class="alert alert-{{session('type')}} alert-dismissible fade show" role="alert">{{session('message')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">	<span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                @endif
-            <div class="card radius-15">
-                <div class="card-body">
-                    <form action="{{route('staff.category.update',$cat->id)}}" method="post">
-                        @method("PUT")
-                        @csrf
-                        <div class="card-title">
-                            <h4 class="mb-0">Category Update Form</h4>
+
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-12 ">
+            <div class="card radius-15 border-lg-top-primary">
+                <div class="card-body px-5 pb-5 pt-3 ">
+                    <div class="card-title d-flex align-items-center">
+                        <div>
+                            <h4 class="text-primary">Product update form</h4>
                         </div>
-                        <hr>
+                        <div class="ml-auto">
+                            <a href="" class="btn btn-outline-info m-1 radius-10"><i class="bx bx-customize mr-1"> </i>
+                                Add product</a>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="alert alert-danger error-message" style="display: none">
+                        <ul></ul>
+                    </div>
+                    <div class="alert alert-success success-message" style="display: none">
+                        <ul></ul>
+                    </div>
+                    <x-show-message></x-show-message>
+                    <form class="create-product" action="{{route('staff.product.update',$product->id)}}" method="POST"
+                          enctype="multipart/form-data">
                         <div class="form-body">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="name">Root Category</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" name="root" id="root">
-                                        <option value="0">__Root__</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}"{{$category->id === $cat->root ?'selected':''}}>{{$category->name}}</option>
-                                            @if(count($category->sub_category))
-                                                @foreach($category->sub_category as $sub)
-                                                    <option value="{{$sub->id}}"{{$sub->id === $cat->root ?'selected':''}}>{{$category->name}}>{{$sub->name}}</option>
-                                                @endforeach
-                                            @endif
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Product Name: </label>
+                                    <input type="text" value="{{$product->name}}" class="form-control radius-5" name="name" id="name"
+                                           onkeyup="convertToSlug(this.value,'#slug')"
+                                           placeholder="Enter Your Product Name"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="slug">Product Slug Name: </label>
+                                    <input type="text" value="{{$product->slug}}" class="form-control radius-5" name="slug" id="slug"
+                                           onkeyup="convertToSlug(this.value,'#slug')"
+                                           placeholder="Enter Your Product Slug Name"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="category">Select Category Name: </label>
+                                    <select class="form-control category radius-5" name="category" id="advance-select">
+                                        <option value="0">Root</option>
+                                        {!! categories_select_data($categories , 3, $product->category_id)!!}
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="brand">Select Brand Name: </label>
+                                    <select class="form-control brand radius-5" name="brand" id="advance-select2">
+                                        <option value="">Select Brand</option>
+                                        {{-- <option value="0">No Brand</option> --}}
+                                        @foreach($brands as $brand)
+                                            <option {{$product->brand_id == $brand->id ? 'selected':''}} value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('root') <span class="text-danger font-italic">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="model">Model Name: </label>
+                                    <input type="text" value="{{$product->model}}" class="form-control radius-5 " name="model"
+                                           placeholder="Enter Your Product Model Name"/>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="name">Category Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="name" id="name" value="{{$cat->name}}" class="form-control">
-                                    @error('name') <span class="text-danger font-italic">{{$message}}</span> @enderror
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="buying_price">Buying Price : </label>
+                                    <input type="number" value="{{$product->buying_price}}" class="form-control radius-5 " name="buying_price"
+                                           placeholder=" Enter Your Buying Price "/>
+                                </div>
+                                <div class=" form-group col-md-4 ">
+                                    <label for=" selling_price ">Selling Price : </label>
+                                    <input type="number" value="{{$product->selling_price}}" class=" form-control radius-5" name="selling_price"
+                                           placeholder="Enter Your Selling Price"/>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for=" special_price ">Featured: </label><br>
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" id="featured" value="1" name="featured"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label" for="featured">Yes </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2 ">
+                                    <label for=" special_price ">Special Offer : </label><br>
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" id="chkspecialoffer" class="custom-control-input"
+                                               onclick="specialoffer(this)" {{$product->special_price != '' ? 'checked':''}}>
+                                        <label class="custom-control-label" for="chkspecialoffer">Yes </label>
+                                    </div>
                                 </div>
                             </div>
-                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label"></label>
-                                <div class="col-sm-9 text-center">
+                            <div id="specialoffershow" style="display:{{$product->special_price != '' ? 'block':'none'}}">
+                                <div class=" form-row ">
+                                    <div class=" form-group col-md-4 ">
+                                        <label for=" special_price ">Special Selling Price : </label>
+                                        <input type="number" value="{{$product->special_price}}" class=" form-control radius-5 " name="special_price"
+                                               placeholder="Enter Your Special Selling Price "/>
+                                    </div>
+                                    <div class="form-group col-md-4 ">
+                                        <label>Special Price Form</label>
+                                        <input type="date" value="{{$product->special_price_from}}" class="form-control input" name="special_p_from"
+                                               placeholder="DD-MM-YYYY"/>
+                                    </div>
+                                    <div class="form-group col-md-4 ">
+                                        <label>Special Price To</label>
+                                        <input type="date" value="{{$product->special_price_to}}" class="form-control input" name="special_p_to"
+                                               placeholder="DD-MM-YYYY ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-row ">
+                                <div class="form-group col-md-4 ">
+                                    <label for="quantity ">Quantity : </label>
+                                    <input type="number " value="{{$product->quantity}}" class="form-control radius-5 " name="quantity"
+                                           placeholder=" Enter Your Quantity "/>
+                                </div>
+                                <div class=" form-group col-md-4 ">
+                                    <label for=" sku_code ">Stock Keeping Unit Code (SKU code) : </label>
+                                    <input type=" number " value="{{$product->sku_code}}" class=" form-control radius-5 " name="sku_code"
+                                           placeholder="Enter Your Stock Keeping Unit Code (sku_code) "/>
+                                </div>
+                                <div class="form-group col-md-4 ">
+                                    <label for=" special_price ">Warranty: </label><br>
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" id="warrantyhidden" value="1" name="warranty"
+                                               class="custom-control-input" onclick="warrantyshow(this)" {{$product->warranty_duration != '' ? 'checked':''}}>
+                                        <label class="custom-control-label" for="warrantyhidden">Yes </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="warrantyshow" style="display:{{$product->warranty_duration != '' ? 'block':'none'}} ">
+                                <div class=" form-row ">
+                                    <div class=" form-group col-md-12">
+                                        <label for="warranty_duration ">Warranty Duration: </label>
+                                        <input type="text " value="{{$product->warranty_duration}}" class=" form-control radius-5" name="warranty_duration"
+                                               placeholder="Enter Your Warranty Duration"/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Warranty Conditions</label>
+                                        <textarea id="texteditor" value="{{$product->warranty_conditions}}" name="warranty_conditions" class="texteditor"
+                                                  placeholder="Product Warranty Conditions"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="formControlRange">Color</label>
+                                    <div class="form-group navbar">
+                                        @foreach (color() as $key=>$color)
+                                            <div class="custom-control custom-checkbox ">
+                                                <input type="checkbox" name="color[]" id="color{{ $color }}"
+                                                       value="{{ $key }}" {{in_array($key,json_decode($product->color)) ? 'checked':''}} class="custom-control-input">
+                                                <label class="custom-control-label"
+                                                       for="color{{ $color }}">{{ $color }} </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="formControlRange">Size</label>
+                                    <div class="form-group  navbar ">
+                                        @foreach (size() as $key=>$size)
+                                            <div class="custom-control custom-checkbox ">
+                                                <input type="checkbox" name="size[]" id="size{{ $size }}"
+                                                       value="{{ $key }}" {{in_array($key,json_decode($product->size)) ? 'checked':''}} class="custom-control-input">
+                                                <label class="custom-control-label"
+                                                       for="size{{ $size }}">{{ $size }} </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-row ">
+                                <div class=" form-group col-md-6 ">
+                                    <label> Product Thumbnail : </label><br>
+                                    <input id="thumbnail" type="file" name="thumbnail">
+                                    <div class="thumbnail ml-2 mt-2">
+                                        <img src="{{asset('public/uploads/products/'.$product->thumbnail)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
+                                    </div>
+                                </div>
+                                <div class=" form-group col-md-6 ">
+                                    <label> Product Image : </label><br>
+                                    <input id="image" type="file" name="image[]" multiple>
+                                    <div class="product-gallery ml-2 mt-2"></div>
+                                </div>
+                            </div>
+                            <div class=" form-row ">
+                                <div class=" form-group col-md-12 ">
+                                    <label for="title"> Product Shot Title : </label>
+                                    <input type="text" id="title" value="{{$product->title}}" name="title" class="texteditor form-control"
+                                           placeholder="Product Shot Title">
+                                </div>
+                                <div class=" form-group col-md-12 ">
+                                    <label for="description"> Product Description : </label>
+                                    <textarea id="texteditor2" name="description" class="texteditor"
+                                              placeholder="Product Shot Title">{!!$product->description!!}</textarea>
+                                </div>
+                            </div>
+                            <label for="status">Product Status: </label>
+                            <div class=" form-row">
+                                <div class="form-group">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" checked id="active" value="active" {{$cat->status === 'active'? 'checked':''}} name="status" class="custom-control-input">
-                                        <label class="custom-control-label" for="active">Active</label>
+                                        <input type="radio" id="status" name="status" value="active"
+                                               class="custom-control-input" {{$product->status == 'Active' ? 'checked':''}}>
+                                        <label class="custom-control-label" for="status">Active</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="inactive" value="inactive" {{$cat->status === 'inactive'? 'checked':''}}  name="status" class="custom-control-input">
-                                        <label class="custom-control-label" for="inactive">Inctive</label>
+                                        <input type="radio" id="status2" name="status" value="inactive"
+                                               class="custom-control-input" {{$product->status == 'Inactive' ? 'checked':''}}>
+                                        <label class="custom-control-label" for="status2">Inactive</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label"></label>
-                                <div class="col-sm-10 text-right">
-                                    <button type="submit" class="btn btn-primary px-4">Update Category</button>
+                            <div class=" form-row">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-info m-1">
+                                        <i class='bx bx-check-circle mr-1'> </i>Update Product
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -86,4 +246,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

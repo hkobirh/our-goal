@@ -29,7 +29,7 @@ class BrandSeeder extends Seeder
 
 
 
-        $json = File::get(storage_path('my-data/brand.json'));
+        $json = File::get(storage_path('my-data/brands.json'));
        // $json = file_get_contents(storage_path('my-data/brand.json'));
         $data = json_decode($json,true);
         foreach ($data as $key => $value) {

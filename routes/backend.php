@@ -13,4 +13,5 @@ Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::resource('brand',BrandController::class);
     Route::resource('category',CategoryController::class);
     Route::resource('product',ProductController::class);
+    Route::post('product/fetch_data',[ProductController::class,'fetch_data'])->name('product.fetch.data');
 });
