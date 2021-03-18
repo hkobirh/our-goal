@@ -147,7 +147,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
+        dd($request->all());
     }
 
     /**
@@ -159,5 +159,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
       return  Product::find($id)->delete();
+    }
+    public function delete(Request $request){
+        if (!empty($request->checkbox)){
+            foreach ($request->checkbox as $id){
+                Product::find($id)->delete();
+            }
+            echo 'Yes';
+        }else{
+            echo 'No';
+        }
     }
 }

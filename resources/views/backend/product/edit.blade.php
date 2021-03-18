@@ -42,8 +42,7 @@
                         <ul></ul>
                     </div>
                     <x-show-message></x-show-message>
-                    <form class="update-product" action="{{route('staff.product.update',$product->id)}}" method="POST"
-                          enctype="multipart/form-data">
+                    <form class="update-product" action="{{ route('staff.product.update',$product->id) }}" method="POST" enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -159,8 +158,8 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label>Warranty Conditions</label>
-                                        <textarea id="texteditor" value="{{$product->warranty_conditions}}" name="warranty_conditions" class="texteditor"
-                                                  placeholder="Product Warranty Conditions"></textarea>
+                                        <textarea id="texteditor" name="warranty_conditions" class="texteditor"
+                                                  placeholder="Product Warranty Conditions">{!! $product->warranty_conditions !!} </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +212,7 @@
                             <div class=" form-row ">
                                 <div class=" form-group col-md-12 ">
                                     <label for="title"> Product Shot Title : </label>
-                                    <input type="text" id="title" value="{{$product->title}}" name="title" class="texteditor form-control"
+                                    <input type="text" id="title" value="{!! $product->title !!}" name="title" class="texteditor form-control"
                                            placeholder="Product Shot Title">
                                 </div>
                                 <div class=" form-group col-md-12 ">

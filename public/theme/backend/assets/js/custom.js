@@ -154,7 +154,7 @@ function pageData(page) {
 //Remove Item
 $('body').on('click', '.remove-item', function () {
     let url = $(this).data('url');
-    let id = $(this).data('id');
+   // let id = $(this).data('id');
     let page = $('.page-item.active .page-link').html();
 
     Swal.fire({
@@ -178,8 +178,7 @@ $('body').on('click', '.remove-item', function () {
                             'Your file has been deleted.',
                             'success'
                         )
-                        pageData(page);
-                        $('.tr' + id).empty();
+                        pageData(page);0
                     }
                 }
             )
@@ -189,4 +188,66 @@ $('body').on('click', '.remove-item', function () {
 
 
 })
+
+//Product update
+$('body').on('click','.update-product', function (e){
+    e.preventDefault();
+    $.ajax({
+        url:$(this).attr('action'),
+        method:'post',
+        contentType: false,
+        processData: false,
+        data:new FormData(this),
+        dataType:'json',
+        success:function (data){
+
+        }
+
+    })
+})
+// For check all product
+$('body').on('click','#checkAll',function (){
+    if (this.checked){
+        $('.check-item').each(function (){
+            this.checked = true;
+        })
+    }else{
+        $('.check-item').each(function (){
+            this.checked = false;
+        })
+    }
+    forActionEnable()
+})
+$('body').on('click','.check-item',function (){
+    if($('.check-item').length === $('.check-item:checked').length){
+        $('#checkAll').prop('checked',true);
+    }else{
+        $('#checkAll').prop('checked',false);
+    }
+    forActionEnable()
+})
+
+function forActionEnable(){
+    if ($('.check-item:checked').length > 0){
+        $('.dropdown-toggle').removeAttr('disabled');
+    }else {
+        $('.dropdown-toggle').attr('disabled',true);
+    }
+}
+
+function submitForm(url){
+    $.ajax({
+        url:url,
+        type: 'post',
+        data: $('#MyForm').serialize(),
+        success: function (data){
+            Toast.fire({
+                icon: 'success',
+                title: 'A product create successfully.'
+            })
+            let page = $('.page-item.active .page-link').html();
+            pageData(page);
+        }
+    })
+}
 

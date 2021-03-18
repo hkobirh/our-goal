@@ -1,8 +1,10 @@
-
-
+<form action="" method="post" id="MyForm">
 <table class="table table-bordered">
 
     <tr>
+        <th>
+            <input type="checkbox" id="checkAll">
+        </th>
         <th>Image</th>
         <th>Name</th>
         <th>Category</th>
@@ -17,7 +19,10 @@
     </tr>
 
     @foreach($data as $row)
-        <tr class="tr{{$row->id}}">
+        <tr>
+            <th>
+                <input type="checkbox" class="check-item" name="checkbox[]" value="{{$row->id}}">
+            </th>
             <td>
                 <div class="product-img bg-transparent border">
                     <img src="{{asset('uploads/products/'.$row->thumbnail)}}" style="width: 35px">
@@ -41,6 +46,21 @@
             </td>
         </tr>
     @endforeach
-</table>
+    <tr>
+        <td colspan="2">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" disabled data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu">
+                    <button type="button" class="dropdown-item">Active</button>
+                    <button type="button" class="dropdown-item">Inactive</button>
+                    <button type="button" class="dropdown-item" onclick="submitForm('{{route('staff.product.delete')}}')">Delete</button>
+                </div>
+            </div>
+        </td>
+        <td colspan="10">
 
+        </td>
+    </tr>
+</table>
+</form>
 {!! $data->links('vendor.pagination.bootstrap-4',['paginator'=>$data])!!}
