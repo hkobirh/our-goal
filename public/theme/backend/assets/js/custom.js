@@ -234,20 +234,44 @@ function forActionEnable(){
         $('.dropdown-toggle').attr('disabled',true);
     }
 }
-
-function submitForm(url){
+/////////////////////////////////////////////////////////////////////////
+function submitForm(url, status){
     $.ajax({
         url:url,
         type: 'post',
-        data: $('#MyForm').serialize(),
+        data: $('#MyForm').serialize() + '&status=' + status,
         success: function (data){
             Toast.fire({
                 icon: 'success',
-                title: 'A product create successfully.'
+                title: 'A product delete successfully.'
             })
             let page = $('.page-item.active .page-link').html();
             pageData(page);
         }
     })
 }
+
+// Price update on the screen
+
+$(document).on('change','.price-update',function (){
+    let price = $(this).val();
+    let url = $(this).data('url');
+    // let type = $(this).data('price-type');
+    $.ajax({
+        url:url,
+        type: 'post',
+        data: { var_price: price},
+        success: function (result){
+                Toast.fire({
+                    icon: 'success',
+                    title: 'A product delete successfully.'
+                })
+                // let page = $('.page-item.active .page-link').html();
+                // pageData(page);
+
+        }
+    })
+})
+
+
 

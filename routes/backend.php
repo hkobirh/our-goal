@@ -16,4 +16,6 @@ Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::post('product/update/{id}',[ProductController::class,'update'])->name('product.update');
     Route::post('product/fetch_data',[ProductController::class,'fetch_data'])->name('product.fetch.data');
     Route::post('product/delete',[ProductController::class,'delete'])->name('product.delete');
+    Route::post('product/update-status',[ProductController::class,'update_status'])->name('product.status');
+    Route::post('product/update-price/{id}',[ProductController::class,'update_price'])->name('product.update.price');
 });

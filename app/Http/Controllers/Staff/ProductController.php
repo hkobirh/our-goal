@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::with('user','brand','category')->paginate(2);
+        $data = Product::with('user', 'brand', 'category')->paginate(2);
         return view('backend.product.manage', compact('data'));
     }
 
@@ -135,7 +135,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $brands = Brand::select('id', 'name')->get();
         $categories = Category::where('root', 0)->get();
-        return view('backend.product.edit',compact('brands','categories','product'));
+        return view('backend.product.edit', compact('brands', 'categories', 'product'));
     }
 
     /**
@@ -158,16 +158,41 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-      return  Product::find($id)->delete();
+        return Product::find($id)->delete();
     }
-    public function delete(Request $request){
-        if (!empty($request->checkbox)){
-            foreach ($request->checkbox as $id){
-                Product::find($id)->delete();
-            }
-            echo 'Yes';
-        }else{
+
+    public function delete(Request $request)
+    {
+        if (!empty($request->checkbox)) {
+            Product::destroy($request->checkbox);
+            //return response()->json(['success' => 'Yea, A product has been successfully deleted.']);
+        } else {
             echo 'No';
         }
     }
+
+    public function update_status(Request $request)
+    {
+        if ($request->ajax()) {
+            if (!empty($request->checkbox)) {
+                foreach ($request->checkbox as $checkbox) {
+                    $product = Product::find($checkbox);
+                    $product->status = $request->status;
+                    $product->save();
+                }
+            } else {
+            }
+        }
+    }
+
+
+    public function update_price(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $product = Product::find($id);
+            $product->buying_price = $request->var_price;
+            $product->save();
+        }
+    }
+
 }
