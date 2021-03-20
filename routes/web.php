@@ -18,7 +18,7 @@ use App\Http\Controllers\TestController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test',[TestController::class,'index']);
+Route::get('/test',[TestController::class,'index'])->middleware('age.check');
 Route::post('/test',[TestController::class,'get_data'])->name('get_data');
 
 require __DIR__.'/auth.php';

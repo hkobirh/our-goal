@@ -22,4 +22,7 @@ class Product extends Model
     public function getStatusAttribute($value){
         return ucfirst($value);
     }
+    public function getNameAttribute($value){
+        return $this->attributes['name'] = 'New ' . $value;
+    }
 }
