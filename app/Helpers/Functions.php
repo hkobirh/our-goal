@@ -26,22 +26,24 @@ function slugify($text)
 }
 
 
-function setMessage($type,$message)
+function setMessage($type, $message)
 {
-    session()->flash('type',$type);
-    session()->flash('message',$message);
+    session()->flash('type', $type);
+    session()->flash('message', $message);
 }
-function categories_select_data($categories,$lavel='',$selected=''){
+
+function categories_select_data($categories, $lavel = '',)
+{
     $output = '';
-    foreach ($categories as $category){
-        $output .= '<option value="'.$category->id.'">'.$category->name.'</option>';
-        if(count($category->sub_category)){
-            foreach ($category->sub_category as $sub){
-                $output .= '<option value="'.$sub->id.'">'.$category->name.'>'.$sub->name.'</option>';
-                if($lavel===3){
-                    if(count($sub->sub_category)){
-                        foreach ($sub->sub_category as $sub1){
-                            $output .= '<option value="'.$sub1->id.'">'.$category->name.'>'.$sub->name.'>'.$sub1->name.'</option>';
+    foreach ($categories as $category) {
+        $output .= '<option value="' . $category->id . '">' . $category->name . '</option>';
+        if (count($category->sub_category)) {
+            foreach ($category->sub_category as $sub) {
+                $output .= '<option value="' . $sub->id . '">' . $category->name . '>' . $sub->name . '</option>';
+                if ($lavel === 3) {
+                    if (count($sub->sub_category)) {
+                        foreach ($sub->sub_category as $sub1) {
+                            $output .= '<option value="' . $sub1->id . '">' . $category->name . '>' . $sub->name . '>' . $sub1->name . '</option>';
                         }
                     }
                 }
@@ -67,6 +69,7 @@ function color()
         // 'Orange' => 'Orange',
     ];
 }
+
 // Size
 function size()
 {
@@ -88,6 +91,7 @@ function gender()
         '3' => 'Other',
     ];
 }
+
 // Marital Status
 function marital_status()
 {
@@ -110,4 +114,48 @@ function religions()
     ];
 }
 
+//Site functions
 
+function site_categories($categories)
+{
+    $output = '';
+    $output .= '<ul class="menu menu-vertical sf-arrows">';
+    foreach ($categories as $category) {
+        $output .= '<li>';
+        $output .= '<a href="#" class="sf-with-ul">' . $category->name . '</a>';
+        if (count($category->sub_category)) {
+            $output .= '<ul>';
+            foreach ($category->sub_category as $sub) {
+                $output .= '<li>';
+                $output .= '<a href="'.route('products',[$category->slug,$sub->slug]).'">' . $sub->name . '</a>';
+                if (count($sub->sub_category)) {
+                    $output .= '<ul>';
+                    foreach ($sub->sub_category as $sub1) {
+                        $output .= '<li>';
+                        $output .= '<a href="'.route('products',[$category->slug,$sub->slug,$sub1->slug]).'">' . $sub1->name . '</a>';
+                        $output .= '</li>';
+                    }
+                    $output .= '</ul>';
+                }
+                $output .= '</li>';
+            }
+            $output .= '</ul>';
+        }
+        $output .= '</li>';
+    }
+    $output .= '</ul>';
+    return $output;
+}
+
+//<li class="active"><a href="index.html"><i class="icon-home"></i>Home</a></li>
+//                            <li>
+//                                <a href="#" class="sf-with-ul"><i class="sicon-envelope"></i>Pages</a>
+//
+//                                <ul>
+//                                    <li><a href="#">Checkout</a>
+//                                        <ul>
+//                                            <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
+//                                        </ul>
+//                                    </li>
+//                                </ul>
+//                            </li>

@@ -17,7 +17,6 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('/', [SiteController::class,'index']);
-
-
+Route::get('/products/{slug1}/{slug2}/{slug3?}', [SiteController::class,'products'])->name('products');
 require __DIR__.'/auth.php';
 require __DIR__.'/backend.php';

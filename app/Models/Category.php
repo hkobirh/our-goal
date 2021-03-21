@@ -17,4 +17,6 @@ class Category extends Model
     public function user(){
         return $this->belongsTo(User::class ,'create_by')->select('id','name');
     }
+    public const RootCategory = 0 ;
+    public const ActiveCategory = 'active' ;
 }
