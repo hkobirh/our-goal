@@ -16,8 +16,8 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        foreach (range(1, 200) as $index) {
-            $name = $faker->unique()->name;
+        foreach (range(1, 500) as $index) {
+            $name = substr($faker->unique()->paragraph(),0,30);
             Product::create([
                 'name' => $name,
                 'slug' => slugify($name),
@@ -27,6 +27,8 @@ class ProductSeeder extends Seeder
                 'buying_price' => rand(50, 1000),
                 'selling_price' => rand(50, 1000),
                 'special_price' => rand(50, 1000),
+                'special_price_from' => date('Y-m-').rand(1, 5),
+                'special_price_to' => date('Y-m-').rand(4, 30),
                 'quantity' => rand(50, 300),
                 'sku_code' => rand(50, 300),
                 'color' => json_encode($this->randomColor()),
@@ -35,8 +37,9 @@ class ProductSeeder extends Seeder
                 'thumbnail' => $faker->imageUrl(),
                 'image' => json_encode(['1.png','2.png']),
                 'description' => $faker->paragraph,
-                'status' => $this->randomStatus(),
-                'create_by' => rand(1, 10)
+                'status' => 'active',
+                'create_by' => rand(1, 10),
+                'update_by' => rand(1, 10)
             ]);
         }
     }

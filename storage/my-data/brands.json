@@ -5,7 +5,6 @@
         "status": "active",
         "create_by": "1"
     },
-
     {
         "name": "Samsung Bangladesh",
         "slug": "samsung-bangladesh",
@@ -33,6 +32,42 @@
     {
         "name": "Symphony",
         "slug": "symphony",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Hero Honda",
+        "slug": "hero-honda",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Pran Rfl",
+        "slug": "pran-rfl",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Panasonic",
+        "slug": "panasonic",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Haque Brothers",
+        "slug": "haque-brothers",
+        "status": "inactive",
+        "create_by": "1"
+    },
+    {
+        "name": "Bangladesh Cement",
+        "slug": "bangladesh-cement",
+        "status": "active",
+        "create_by": "1"
+    },
+    {
+        "name": "Megna Group",
+        "slug": "megna-group",
         "status": "active",
         "create_by": "1"
     }

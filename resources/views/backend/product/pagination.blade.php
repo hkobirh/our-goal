@@ -10,6 +10,7 @@
             <th>Category</th>
             <th>Brand</th>
             <th>Model</th>
+            <th>Featured</th>
             <th>B. Price</th>
             <th>S. Price</th>
             <th>SP. Price</th>
@@ -25,13 +26,16 @@
                 </th>
                 <td>
                     <div class="product-img bg-transparent border">
-                        <img src="{{asset('uploads/products/'.$row->thumbnail)}}" style="width: 35px">
+                        <a href="{{route('product',$row->slug)}}"><img src="{{$row->thumbnail}}" style="width: 35px" alt=""></a>
                     </div>
                 </td>
-                <td>{{$row->name}}</td>
+                <td><a target="_blank" href="{{route('product',$row->slug)}}">{{substr($row->name,0,12)}}</a></td>
                 <td>{{$row->category->name}}</td>
                 <td>{{$row->brand->name}}</td>
                 <td>{{$row->model}}</td>
+                <td>
+                    <input type="checkbox" {{$row->featured ? 'checked':''}} class="featured-image" data-url="{{route('staff.product.featured',$row->id)}}" name="checkbox[]" value="{{$row->featured}}">
+                </td>
                 <td><input type="text" class="form-control price-update" data-id="{{$row->id}}" data-url="{{route('staff.product.update.price',$row->id)}}" data-price-type="buying_price" value="{{$row->buying_price}}" style="width: 70px"></td>
                 <td><input type="text" class="form-control price-update" data-id="{{$row->id}}" data-url="{{route('staff.product.update.price',$row->id)}}" data-price-type="selling_price" value="{{$row->selling_price}}" style="width: 70px"></td>
                 <td><input type="text" class="form-control price-update" data-id="{{$row->id}}" data-url="{{route('staff.product.update.price',$row->id)}}" data-price-type="special_price" value="{{$row->special_price}}" style="width: 70px"></td>

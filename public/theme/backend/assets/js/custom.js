@@ -272,6 +272,22 @@ $(document).on('change','.price-update',function (){
         }
     })
 })
+$(document).on('click','.featured-image', function (){
+    let url = $(this).data('url');
+    $.ajax({
+        url:url,
+        type: 'post',
+        data: { },
+        success: function (result){
+            Toast.fire({
+                icon: 'success',
+                title: 'A featured update successfully.'
+            })
+        }
+    })
+})
+
+
 
 
 

@@ -16,7 +16,11 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', [SiteController::class,'index']);
+Route::get('/', [SiteController::class,'index'])->name('index');
 Route::get('/products/{slug1}/{slug2}/{slug3?}', [SiteController::class,'products'])->name('products');
+Route::get('/product/{slug}', [SiteController::class,'product'])->name('product');
+Route::post('/product-quick-view/{slug}', [SiteController::class,'product_quick_view'])->name('product.quick.view');
+Route::get('/brand/{slug}', [SiteController::class,'brand'])->name('brand');
+
 require __DIR__.'/auth.php';
 require __DIR__.'/backend.php';

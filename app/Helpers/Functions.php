@@ -32,7 +32,7 @@ function setMessage($type, $message)
     session()->flash('message', $message);
 }
 
-function categories_select_data($categories, $lavel = '',)
+function categories_select_data($categories, $lavel = '')
 {
     $output = '';
     foreach ($categories as $category) {
@@ -146,16 +146,3 @@ function site_categories($categories)
     $output .= '</ul>';
     return $output;
 }
-
-//<li class="active"><a href="index.html"><i class="icon-home"></i>Home</a></li>
-//                            <li>
-//                                <a href="#" class="sf-with-ul"><i class="sicon-envelope"></i>Pages</a>
-//
-//                                <ul>
-//                                    <li><a href="#">Checkout</a>
-//                                        <ul>
-//                                            <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
-//                                        </ul>
-//                                    </li>
-//                                </ul>
-//                            </li>

@@ -9,6 +9,7 @@
 
     <title>@yield('title') || An unique business site.</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="HTML5 Template" />
     <meta name="description" content="Porto - Bootstrap eCommerce Template">
     <meta name="author" content="SW-THEMES">
@@ -34,27 +35,6 @@
 
 <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
 @include('frontend.components.mobile-menu')
-<div class="newsletter-popup mfp-hide bg-img" id="newsletter-popup-form" style="background: #f1f1f1 no-repeat center/cover url("{{('theme/frontend/assets/images/newsletter_popup_bg.jpg')}}")>
-    <div class="newsletter-popup-content">
-        <img src="{{asset('theme/frontend/assets/images/logo-black.png')}}" alt="Logo" class="logo-newsletter">
-        <h2>BE THE FIRST TO KNOW</h2>
-        <p>Subscribe to the Porto eCommerce newsletter to receive timely updates from your favorite products.</p>
-        <form action="#">
-            <div class="input-group">
-                <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Email address" required>
-                <input type="submit" class="btn" value="Go!">
-            </div><!-- End .from-group -->
-        </form>
-        <div class="newsletter-subscribe">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="1">
-                    Don't show this popup again
-                </label>
-            </div>
-        </div>
-    </div><!-- End .newsletter-popup-content -->
-</div><!-- End .newsletter-popup -->
 <!-- Add Cart Modal -->
 <div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -74,10 +54,19 @@
 
 <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" id="productQuickViewData">
+
+    </div>
+</div>
+</div>
+
 <!-- Plugins JS File -->
 <script src="{{asset('theme/frontend/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/plugins.min.js')}}"></script>
+<script src="{{asset('theme/frontend/assets/js/custom.js')}}"></script>
 
 <!-- Main JS File -->
 <script src="{{asset('theme/frontend/assets/js/main.min.js')}}"></script>

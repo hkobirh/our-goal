@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::with('user', 'brand', 'category')->paginate(2);
+        $data = Product::with('user', 'brand', 'category')->paginate(10);
         return view('backend.product.manage', compact('data'));
     }
 
@@ -191,6 +191,15 @@ class ProductController extends Controller
         if ($request->ajax()) {
             $product = Product::find($id);
             $product->buying_price = $request->var_price;
+            $product->save();
+        }
+    }
+
+    public function featured(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $product = Product::find($id);
+            $product->featured = $product->featured ? 0 : 1 ;
             $product->save();
         }
     }

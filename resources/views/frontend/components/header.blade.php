@@ -67,7 +67,7 @@
                 <button class="mobile-menu-toggler mr-2" type="button">
                     <i class="icon-menu"></i>
                 </button>
-                <a href="index.html" class="logo">
+                <a href="{{route('index')}}" class="logo">
                     <img src="{{asset('theme/frontend/assets/images/logo.png')}}" alt="Porto Logo">
                 </a>
             </div><!-- End .header-left -->
@@ -114,7 +114,7 @@
                 <a href="#" class="header-icon"><i class="icon-wishlist-2"></i></a>
 
                 <div class="dropdown cart-dropdown">
-                    <a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                    <a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown"  aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
                         <span class="cart-count badge-circle">2</span>
                     </a>

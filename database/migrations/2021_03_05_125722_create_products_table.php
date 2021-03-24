@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            //$table->string('product_code')->unique();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id')->default(0);
             $table->string('model')->nullable();
@@ -37,6 +36,7 @@ class CreateProductsTable extends Migration
             $table->string('warranty_duration')->nullable();
             $table->longText('warranty_conditions')->nullable();
             $table->longText('description')->nullable();
+            $table->tinyInteger('featured')->default(0);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('create_by');
             $table->unsignedBigInteger('update_by')->nullable();

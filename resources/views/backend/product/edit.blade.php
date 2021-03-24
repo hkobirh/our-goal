@@ -63,7 +63,7 @@
                                     <label for="category">Select Category Name: </label>
                                     <select class="form-control category radius-5" name="category" id="advance-select">
                                         <option value="0">Root</option>
-                                        {!! categories_select_data($categories , 3)!!}
+                                        {!! categories_select_data($categories ,$category->category_id, 3)!!}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
