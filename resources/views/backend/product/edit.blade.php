@@ -63,7 +63,7 @@
                                     <label for="category">Select Category Name: </label>
                                     <select class="form-control category radius-5" name="category" id="advance-select">
                                         <option value="0">Root</option>
-                                        {!! categories_select_data($categories ,$category->category_id, 3)!!}
+                                        {!! categories_select_data($categories , 3)!!}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -119,12 +119,12 @@
                                     </div>
                                     <div class="form-group col-md-4 ">
                                         <label>Special Price Form</label>
-                                        <input type="date" value="{{$product->special_price_from}}" class="form-control input" name="special_p_from"
+                                        <input type="text" value="{{$product->special_price_from}}" class="form-control input" name="special_price_from"
                                                placeholder="DD-MM-YYYY"/>
                                     </div>
                                     <div class="form-group col-md-4 ">
                                         <label>Special Price To</label>
-                                        <input type="date" value="{{$product->special_price_to}}" class="form-control input" name="special_p_to"
+                                        <input type="text" value="{{$product->special_price_to}}" class="form-control input" name="special_price_to"
                                                placeholder="DD-MM-YYYY ">
                                     </div>
                                 </div>

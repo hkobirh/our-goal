@@ -10,7 +10,7 @@
     <title>@yield('title') || An unique business site.</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="keywords" content="HTML5 Template" />
+    <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="Porto - Bootstrap eCommerce Template">
     <meta name="author" content="SW-THEMES">
 
@@ -21,16 +21,18 @@
 
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('theme/frontend/assets/css/style.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('theme/frontend/assets/vendor/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('theme/frontend/assets/vendor/simple-line-icons/css/simple-line-icons.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('theme/frontend/assets/vendor/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('theme/frontend/assets/vendor/simple-line-icons/css/simple-line-icons.min.css')}}">
 </head>
 <body>
 <div class="page-wrapper">
-        @include('frontend.components.header')
+    @include('frontend.components.header')
     <main class="main">
         @yield('content')
     </main><!-- End .main -->
-         @include('frontend.components.footer')
+    @include('frontend.components.footer')
 </div><!-- End .page-wrapper -->
 
 <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
@@ -44,8 +46,12 @@
                 <h4 id="productTitle"></h4>
                 <img src="#" id="productImage" width="100" height="100" alt="adding cart image">
                 <div class="btn-actions">
-                    <a href="cart.html"><button class="btn-primary">Go to cart page</button></a>
-                    <a href="#"><button class="btn-primary" data-dismiss="modal">Continue</button></a>
+                    <a href="cart.html">
+                        <button class="btn-primary">Go to cart page</button>
+                    </a>
+                    <a href="#">
+                        <button class="btn-primary" data-dismiss="modal">Continue</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -54,12 +60,16 @@
 
 <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content" id="productQuickViewData">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="productQuickViewData" class="product-single-container product-single-default product-quick-view">
 
+
+            </div>
+        </div>
     </div>
-</div>
 </div>
 
 <!-- Plugins JS File -->

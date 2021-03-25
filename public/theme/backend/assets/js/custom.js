@@ -122,7 +122,10 @@ $(function () {
     });
 });
 
-$(".input").datepicker({
+
+//Date picker================================
+$( ".input" ).datepicker({
+    dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true,
     autoSize: true
@@ -234,19 +237,22 @@ function forActionEnable(){
         $('.dropdown-toggle').attr('disabled',true);
     }
 }
-/////////////////////////////////////////////////////////////////////////
+
 function submitForm(url, status){
     $.ajax({
         url:url,
         type: 'post',
         data: $('#MyForm').serialize() + '&status=' + status,
         success: function (data){
-            Toast.fire({
-                icon: 'success',
-                title: 'A product delete successfully.'
-            })
-            let page = $('.page-item.active .page-link').html();
-            pageData(page);
+            if(data.success){
+                Toast.fire({
+                    icon: 'success',
+                    title: 'A product delete successfully.'
+                })
+                let page = $('.page-item.active .page-link').html();
+                pageData(page);
+            }
+
         }
     })
 }

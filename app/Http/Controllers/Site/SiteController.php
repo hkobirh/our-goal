@@ -65,5 +65,9 @@ class SiteController extends Controller
       $product = Product::where('slug',$slug)->first();
       return view('frontend.product_quick_view',compact('product'));
     }
+    public function load_more_data(Request $request){
+
+    }
+
 }
 

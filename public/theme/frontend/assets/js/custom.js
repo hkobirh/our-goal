@@ -19,4 +19,10 @@ $(document).ready(function (){
             }
         })
     })
+
+    load_more_data();
+    function load_more_data(){
+        alert('ok')
+    }
+
 })

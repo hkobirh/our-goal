@@ -1,6 +1,6 @@
 
 
-<div class="product-single-container product-single-default product-quick-view">
+
     <div class="row row-sparse">
         <div class="col-lg-6 product-single-gallery">
             <div class="product-slider-container">
@@ -84,6 +84,5 @@
             </div><!-- End .product single-share -->
         </div><!-- End .product-single-details -->
     </div><!-- End .row -->
-</div><!-- End .product-single-container -->
 
 <script src="{{asset('theme/frontend/assets/js/main.min.js')}}"></script>
