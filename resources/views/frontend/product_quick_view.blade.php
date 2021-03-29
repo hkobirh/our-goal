@@ -5,7 +5,7 @@
         <div class="col-lg-6 product-single-gallery">
             <div class="product-slider-container">
                 <div class="product-single-carousel owl-carousel owl-theme">
-                    @foreach(json_decode($product->image) as $image)
+                    @foreach($images as $image)
                     <div class="product-item">
                         <img class="product-single-image" src="{{asset('uploads/products/'.$image)}}" data-zoom-image="{{asset('uploads/products/'.$image)}}"/>
                     </div>

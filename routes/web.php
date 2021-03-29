@@ -3,7 +3,8 @@
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Staff\DashboardController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Site\FrontendProductController;
+use App\Http\Controllers\Site\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,19 @@ use App\Http\Controllers\TestController;
 Route::get('/', [SiteController::class,'index'])->name('index');
 Route::get('/products/{slug1}/{slug2}/{slug3?}', [SiteController::class,'products'])->name('products');
 Route::get('/product/{slug}', [SiteController::class,'product'])->name('product');
-Route::post('/product/load-more-data', [SiteController::class,'load_more_data'])->name('load_more_data');
 Route::post('/product-quick-view/{slug}', [SiteController::class,'product_quick_view'])->name('product.quick.view');
 Route::get('/brand/{slug}', [SiteController::class,'brand'])->name('brand');
+
+
+
+Route::get('/cart/show',[CartController::class,'index'])->name('cart.show');
+Route::post('/cart/add',[CartController::class,'store'])->name('cart.add');
+Route::post('/cart/update/{id}',[CartController::class,'update'])->name('cart.update');
+Route::get('/cart/remove/{id}',[CartController::class,'destroy'])->name('cart.remove');
+
+
+Route::get('all-products', [FrontendProductController::class,'index']);
+Route::post('load-more-data', [FrontendProductController::class,'load_more_data'])->name('load_more_data');
 
 
 require __DIR__.'/auth.php';

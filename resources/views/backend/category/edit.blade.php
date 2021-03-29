@@ -41,16 +41,10 @@
                                 <label class="col-sm-3 col-form-label" for="name">Root Category</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" name="root" id="root">
-                                        {!! categories_select_data($categories , 3) !!}
                                         <option value="0">__Root__</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}"{{$category->id === $cat->root ?'selected':''}}>{{$category->name}}</option>
-                                            @if(count($category->sub_category))
-                                                @foreach($category->sub_category as $sub)
-                                                    <option value="{{$sub->id}}"{{$sub->id === $cat->root ?'selected':''}}>{{$category->name}}>{{$sub->name}}</option>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
+
+                                        {!! categories_select_data($categories , 3, $cat->root) !!}
+
                                     </select>
                                     @error('root') <span class="text-danger font-italic">{{$message}}</span> @enderror
                                 </div>

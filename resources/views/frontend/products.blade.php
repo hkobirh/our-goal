@@ -34,7 +34,6 @@
                     <li class="breadcrumb-item active" aria-current="page">Accessories</li>
                 </ol>
             </nav>
-
             <div class="row">
                 <div class="col-lg-9 main-content">
                     <nav class="toolbox">
@@ -101,6 +100,12 @@
                                             <button class="btn-icon btn-add-cart" data-toggle="modal"
                                                     data-target="#addCartModal"><i class="icon-shopping-cart"></i>
                                             </button>
+
+                                            <form action="{{route('cart.add')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$product->id}}">
+                                                <button class="btn-icon btn-add-cart" data-target="" type="submit"><i class="icon-shopping-cart"></i></button>
+                                            </form>
                                         </div>
                                         <a href="{{route('product.quick.view',$product->slug)}}" class="btn-quickview">Quick View</a>
                                     </figure>

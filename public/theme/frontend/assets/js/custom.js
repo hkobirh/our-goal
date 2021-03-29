@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$(document).ready(function () {
 
     $.ajaxSetup({
         headers: {
@@ -6,23 +6,21 @@ $(document).ready(function (){
         }
     })
 
-    $('body').on('click','.btn-quickview',function (e){
+    $('body').on('click', '.btn-quickview', function (e) {
         e.preventDefault();
         $('.bd-example-modal-lg').modal('show');
         let url = $(this).attr('href');
 
         $.ajax({
-            url : url,
+            url: url,
             method: 'post',
-            success: function (data){
+            success: function (data) {
                 $('#productQuickViewData').html(data);
             }
         })
     })
-
-    load_more_data();
-    function load_more_data(){
-        alert('ok')
-    }
+    $(document).on('click', '.color-item', function () {
+        $(this).toggleClass('active')
+    })
 
 })

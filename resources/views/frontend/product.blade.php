@@ -61,13 +61,22 @@
                     </div><!-- End .product-desc -->
 
                     <div class="product-filters-container">
+                        <div class="product-single-filter">
+                            <label>Colors:</label>
+                            <ul class="config-swatch-list">
+                                @foreach($colors as $color)
+                                <li class="color-item" data-value="{{$color}}">
+                                    <a href="javascript:" style="background-color: {{$color}};"></a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
                         <div class="product-single-filter mb-2">
                             <label>Sizes:</label>
                             <ul class="config-size-list">
-                                <li class="active"><a href="#">S</a></li>
-                                <li><a href="#">M</a></li>
-                                <li><a href="#">L</a></li>
-                                <li><a href="#">X</a></li>
+                                @foreach($sizes as $size)
+                                <li class="size-item"><a href="javascript:">{{$size}}</a></li>
+                                @endforeach
                             </ul>
                         </div><!-- End .product-single-filter -->
                     </div><!-- End .product-filters-container -->

@@ -52,22 +52,29 @@ class SiteController extends Controller
     public function product($slug)
     {
         $product = Product::where('slug', $slug)->first();
+
+        $colors = json_decode($product->color);
+
+        $sizes = json_decode($product->size);
+
         $related_product = Product::select('id', 'name', 'slug', 'category_id', 'brand_id', 'model', 'buying_price', 'selling_price', 'special_price', 'special_price_from', 'special_price_to', 'quantity', 'sku_code', 'color', 'size', 'title', 'thumbnail', 'image', 'warranty', 'warranty_duration', 'warranty_conditions', 'description', 'status', 'create_by', 'update_by')
             ->where('category_id', $product->category_id)->active()->get();
-        return view('frontend/product', compact('product', 'related_product'));
+        return view('frontend/product', compact('product', 'related_product','colors','sizes'));
     }
 
     public function brand($slug)
     {
 
     }
-    public function product_quick_view($slug){
-      $product = Product::where('slug',$slug)->first();
-      return view('frontend.product_quick_view',compact('product'));
-    }
-    public function load_more_data(Request $request){
 
+    public function product_quick_view($slug)
+    {
+        $product = Product::where('slug', $slug)->first();
+        $images = json_decode($product->image);
+        array_splice($images, 0, 0, $product->thumbnail);
+        return view('frontend.product_quick_view', compact('product','images'));
     }
+
 
 }
 

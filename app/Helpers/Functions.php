@@ -32,14 +32,23 @@ function setMessage($type, $message)
     session()->flash('message', $message);
 }
 
-function categories_select_data($categories, $lavel = '')
+function categories_select_data($categories, $lavel = '', $selected = "")
 {
     $output = '';
     foreach ($categories as $category) {
-        $output .= '<option value="' . $category->id . '">' . $category->name . '</option>';
+
+        if ($category->id == $selected) {
+            $output .= '<option value="' . $category->id . '"  selected="">' . $category->name . '</option>';
+        } else {
+            $output .= '<option value="' . $category->id . '">' . $category->name . '</option>';
+        }
         if (count($category->sub_category)) {
             foreach ($category->sub_category as $sub) {
-                $output .= '<option value="' . $sub->id . '">' . $category->name . '>' . $sub->name . '</option>';
+
+                if ($sub->id == $selected)
+                    $output .= '<option value="' . $sub->id . '" selected="">' . $category->name . '>' . $sub->name . '</option>';
+                else $output .= '<option value="' . $sub->id . '">' . $category->name . '>' . $sub->name . '</option>';
+
                 if ($lavel === 3) {
                     if (count($sub->sub_category)) {
                         foreach ($sub->sub_category as $sub1) {
@@ -127,12 +136,12 @@ function site_categories($categories)
             $output .= '<ul>';
             foreach ($category->sub_category as $sub) {
                 $output .= '<li>';
-                $output .= '<a href="'.route('products',[$category->slug,$sub->slug]).'">' . $sub->name . '</a>';
+                $output .= '<a href="' . route('products', [$category->slug, $sub->slug]) . '">' . $sub->name . '</a>';
                 if (count($sub->sub_category)) {
                     $output .= '<ul>';
                     foreach ($sub->sub_category as $sub1) {
                         $output .= '<li>';
-                        $output .= '<a href="'.route('products',[$category->slug,$sub->slug,$sub1->slug]).'">' . $sub1->name . '</a>';
+                        $output .= '<a href="' . route('products', [$category->slug, $sub->slug, $sub1->slug]) . '">' . $sub1->name . '</a>';
                         $output .= '</li>';
                     }
                     $output .= '</ul>';
