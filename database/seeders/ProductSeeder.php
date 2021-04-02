@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode($this->randomColor()),
                 'size' => json_encode($this->randomSize()),
                 'title' => 'Test title',
-                'thumbnail' => $faker->imageUrl(),
+                'thumbnail' => 'images.png',
                 'image' => json_encode(['1.png','2.png']),
                 'description' => $faker->paragraph,
                 'status' => 'active',

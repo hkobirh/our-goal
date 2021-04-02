@@ -41,6 +41,7 @@ class CreateProductsTable extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('create_by');
             $table->unsignedBigInteger('update_by')->nullable();
+
             $table->foreign('create_by')->on('users')->references('id')->onDelete('cascade');
             $table->foreign('update_by')->on('users')->references('id')->onDelete('cascade');
             $table->foreign('category_id')->on('categories')->references('id')->onDelete('cascade');

@@ -89,7 +89,7 @@
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
                                         <a href="{{route('product',$product->slug)}}">
-                                            <img src="{{$product->thumbnail}}" alt="">
+                                            <img src="{{asset('uploads/'.$product->thumbnail)}}" alt="">
                                         </a>
                                         <div class="label-group">
                                             @if($s_price)
@@ -97,15 +97,18 @@
                                             @endif
                                         </div>
                                         <div class="btn-icon-group">
-                                            <button class="btn-icon btn-add-cart" data-toggle="modal"
-                                                    data-target="#addCartModal"><i class="icon-shopping-cart"></i>
-                                            </button>
 
+                                            <button class="btn-icon btn-add-cart add-to-cart" data-id="{{$product->id}}"><i class="icon-shopping-cart"></i></button>
+
+
+{{--
                                             <form action="{{route('cart.add')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$product->id}}">
                                                 <button class="btn-icon btn-add-cart" data-target="" type="submit"><i class="icon-shopping-cart"></i></button>
-                                            </form>
+                                            </form>--}}
+
+
                                         </div>
                                         <a href="{{route('product.quick.view',$product->slug)}}" class="btn-quickview">Quick View</a>
                                     </figure>

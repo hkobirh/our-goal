@@ -18,6 +18,7 @@
     <link rel="icon" type="image/x-icon" href="{{asset('theme/frontend/assets/images/icons/favicon.ico')}}">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{asset('theme/frontend/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('theme/frontend/assets/css/toastr.min.css')}}">
 
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('theme/frontend/assets/css/style.min.css')}}">
@@ -76,6 +77,7 @@
 <script src="{{asset('theme/frontend/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/plugins.min.js')}}"></script>
+<script src="{{asset('theme/frontend/assets/js/toastr.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/custom.js')}}"></script>
 
 <!-- Main JS File -->

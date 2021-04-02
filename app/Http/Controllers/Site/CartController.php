@@ -17,10 +17,10 @@ class CartController extends Controller
     public function index()
     {
         $cart_items = Cart::getContent();
-       if(count($cart_items))
-        return view('frontend.cart.index',compact('cart_items'));
-       else
-           return redirect()->route('index');
+        if (count($cart_items))
+            return view('frontend.cart.index', compact('cart_items'));
+        else
+            return redirect()->route('index');
     }
 
     /**
@@ -58,9 +58,9 @@ class CartController extends Controller
             'name' => $product->name,
             'price' => $price,
             'quantity' => 1,
-            'attributes'=>[
-                'slug'=>$product->slug,
-                'image'=>$product->thumbnail,
+            'attributes' => [
+                'slug' => $product->slug,
+                'image' => $product->thumbnail,
             ]
         ]);
         return redirect()->back();
@@ -97,10 +97,10 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Cart::update($id,[
-            'quantity'=>[
-                'relative'=> false,
-                'value'=>$request->quantity,
+        Cart::update($id, [
+            'quantity' => [
+                'relative' => false,
+                'value' => $request->quantity,
             ]
         ]);
 
@@ -117,5 +117,64 @@ class CartController extends Controller
     {
         Cart::remove($id);
         return redirect()->back();
+    }
+
+    public function ajax_cart_add(Request $request)
+    {
+
+        $product = Product::find($request->id);
+
+        $s_price = false;
+        if ($product->special_price_from <= date('Y-m-d') && $product->special_price_to >= date('Y-m-d'))
+            $s_price = true;
+
+        if ($s_price) {
+            $price = $product->special_price;
+        } else {
+            $price = $product->selling_price;
+        }
+
+
+        Cart::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $price,
+            'quantity' => 1,
+            'attributes' => [
+                'slug' => $product->slug,
+                'image' => $product->thumbnail,
+            ]
+        ]);
+        return response()->json([
+            'status' => 1,
+            'message' => 'Data added successfully.',
+        ]);
+    }
+
+    public function get_cart_data(){
+        return view('frontend.cart.get_cart_data');
+    }
+
+    public function ajax_cart_clear(){
+        if( request()->ajax()){
+            Cart::clear();
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Items deleted successfully.',
+            ]);
+        }
+    }
+
+    public function ajax_cart_remove(Request $request){
+        $product = Product::find($request->id);
+        if( request()->ajax()){
+            Cart::remove($request->id);
+
+            return response()->json([
+                'status' => 1,
+                'message' => $product->name .' deleted successfully.',
+            ]);
+        }
     }
 }
