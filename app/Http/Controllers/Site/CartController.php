@@ -121,6 +121,7 @@ class CartController extends Controller
 
     public function ajax_cart_add(Request $request)
     {
+        dd($request->all());
 
         $product = Product::find($request->id);
 

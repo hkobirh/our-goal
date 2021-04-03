@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('customer', [
+            'except' => [
+                'login',
+                'register',
+                'logout'
+            ]
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +31,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        if(!Session::get('customer_id')){
-            return redirect('/');
-        }
+
     }
 
     /**
@@ -94,11 +103,11 @@ class CustomerController extends Controller
         ]);
         $customer = Customer::where('email', $request->email)->first();
         if ($customer) {
-            if(password_verify($request->password,$customer->password)){
-                Session::put('customer_id',$customer->id);
-                Session::put('customer_name',$customer->name);
+            if (password_verify($request->password, $customer->password)) {
+                Session::put('customer_id', $customer->id);
+                Session::put('customer_name', $customer->name);
                 return redirect('/');
-            }else{
+            } else {
                 $this->login_error();
             };
         } else {
@@ -114,7 +123,7 @@ class CustomerController extends Controller
 
     public function login()
     {
-        if(Session::get('customer_id')) {
+        if (Session::get('customer_id')) {
             return redirect('/');
         }
         return view('frontend.customer.login');

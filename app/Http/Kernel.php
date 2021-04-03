@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AgeCheck;
+use App\Http\Middleware\CustomerMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'age.check'=>AgeCheck::class,
+        'customer'=>CustomerMiddleware::class,
     ];
 }

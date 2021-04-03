@@ -26,10 +26,13 @@ $(document).ready(function () {
     $(document).on('click', '.add-to-cart', function (e) {
         e.preventDefault();
         let id = $(this).data('id');
+        let color = $('.color-item.active').map(function (){
+            return $(this).data('value');
+        }).get();
         $.ajax({
             url: baseUrl + 'ajax/cart/add',
             method: 'post',
-            data:{id:id},
+            data:{id:id,color:color},
             success: function (res) {
                 if(res.status === 1){
                     toastr.info(res.message);
