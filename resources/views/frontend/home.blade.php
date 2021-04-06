@@ -42,8 +42,8 @@
 							'nav': false
 						}">
                     <div class="home-slide home-slide1 banner banner-md-vw banner-sm-vw">
-                        <img class="owl-lazy slide-bg" src="{{asset('theme/frontend/assets/images/lazy.png')}}"
-                             data-src="{{asset('theme/frontend/assets/images/slider/1.jpg')}}" alt="slider image">
+                        <img class="owl-lazy slide-bg" src=""
+                             data-src="{{asset('theme/frontend/assets/images/slider/2.jpg')}}" alt="slider image">
                         <div class="banner-layer banner-layer-middle">
                             <h4 class="text-white pb-4 mb-0">Find the Boundaries. Push Through!</h4>
                             <h2 class="text-white mb-0">Summer Sale</h2>
@@ -56,8 +56,8 @@
                     </div><!-- End .home-slide -->
 
                     <div class="home-slide home-slide2 banner banner-md-vw banner-sm-vw">
-                        <img class="owl-lazy slide-bg" src="{{asset('theme/frontend/assets/images/lazy.png')}}"
-                             data-src="{{asset('theme/frontend/assets/images/slider/2.jpg')}}" alt="slider image">
+                        <img class="owl-lazy slide-bg" src=""
+                             data-src="{{asset('theme/frontend/assets/images/slider/4.jpg')}}" alt="slider image">
                         <div class="banner-layer banner-layer-middle text-uppercase">
                             <h4 class="m-b-2">Over 200 products with discounts</h4>
                             <h2 class="m-b-3">Great Deals</h2>
@@ -67,8 +67,8 @@
                     </div><!-- End .home-slide -->
 
                     <div class="home-slide home-slide3 banner banner-md-vw banner-sm-vw">
-                        <img class="owl-lazy slide-bg" src="{{asset('theme/frontend/assets/images/lazy.png')}}"
-                             data-src="{{asset('theme/frontend/assets/images/slider/4.jpg')}}" alt="slider image">
+                        <img class="owl-lazy slide-bg" src=""
+                             data-src="{{asset('theme/frontend/assets/images/slider/5.jpg')}}" alt="slider image">
                         <div class="banner-layer banner-layer-middle text-uppercase">
                             <h4 class="m-b-2">Up to 70% off</h4>
                             <h2 class="m-b-3">New Arrivals</h2>

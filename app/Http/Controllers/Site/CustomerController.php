@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderInfo;
+use App\Models\Payment;
+use App\Models\Shipping;
+use Cart;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -18,10 +23,106 @@ class CustomerController extends Controller
         $this->middleware('customer', [
             'except' => [
                 'login',
+                'login_form',
                 'register',
-                'logout'
+                'reg_form',
+                'logout',
+                'checkout',
+                'shipping',
+                'review_payments',
+                'new_order'
             ]
         ]);
+    }
+
+    public function shipping(Request $request)
+    {
+        $request->validate(
+            [
+                "first_name" => "required|min:2|max:20",
+                "last_name" => 'required|min:2|max:20',
+                "address" => "required|min:2",
+                "phone" => "required|min:11|max:11"
+            ]);
+        $shipping = Shipping::create([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "address" => $request->address,
+            "phone" => $request->phone
+        ]);
+        session()->put('shipping_id', $shipping->id);
+        return redirect()->route('review.payments');
+    }
+
+    public function review_payments()
+    {
+        if (Session::get('shipping_id')) {
+            return view('frontend.checkout.review-payments');
+        } else {
+            return redirect()->back();
+        }
+    }
+// ===========================New order function start here================================================================>
+    public function new_order(Request $request)
+    {
+        $request->validate([
+            'payment_type' => 'required'
+        ]);
+        $order = Order::create([
+            'customer_id' => session('customer_id'),
+            'shipping_id' => session('shipping_id'),
+            'total' => Cart::getSubtotal()
+        ]);
+
+        foreach (Cart::getContent() as $item) {
+            OrderInfo::create([
+                'order_id' => $order->id,
+                'product_id' => $item->id,
+                'product_name' => $item->name,
+                'product_price' => $item->price,
+                'product_qty' => $item->quantity
+            ]);
+        }
+
+        Payment::create([
+            'order_id' => $order->id,
+            'payment_type' => $request->payment_type
+        ]);
+
+        Cart::clear();
+        session()->flash('order_id',$order->id);
+        session()->flash('order_success', 'Order is success.');
+        return redirect()->route('order.success');
+    }
+// ===========================New order function end here================================================================>
+
+
+    public function order_success()
+    {
+        if(session('order_id'))
+        return view('frontend.checkout.order-success');
+        return redirect('/');
+    }
+
+
+    public function checkout()
+    {
+        if (Session::get('customer_id')) {
+            if (Cart::isEmpty()) {
+                return redirect('/');
+            } else {
+                return view('frontend.checkout.index');
+            }
+        } else {
+            return redirect()->route('customer.login');
+        }
+    }
+
+
+    public function login_form()
+    {
+        if (Session::get('customer_id')) return redirect('customer.dashboard');
+        return view('frontend.customer.login');
     }
 
     /**
@@ -31,62 +132,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return view('frontend.customer.dashboard');
     }
 
     /**
@@ -95,7 +141,7 @@ class CustomerController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function login_form(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
             'email' => "required",
@@ -106,7 +152,13 @@ class CustomerController extends Controller
             if (password_verify($request->password, $customer->password)) {
                 Session::put('customer_id', $customer->id);
                 Session::put('customer_name', $customer->name);
-                return redirect('/');
+
+                if (Cart::isEmpty()) {
+                    return redirect()->route('customer.dashboard');
+                } else {
+                    return redirect()->route('checkout');
+                }
+
             } else {
                 $this->login_error();
             };
@@ -121,15 +173,7 @@ class CustomerController extends Controller
         Session()->flash('login_error', 'Email or password is error.');
     }
 
-    public function login()
-    {
-        if (Session::get('customer_id')) {
-            return redirect('/');
-        }
-        return view('frontend.customer.login');
-    }
-
-    public function reg_form(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'first_name' => "required|min:2|max:30",
@@ -154,10 +198,17 @@ class CustomerController extends Controller
         /*        Mail::to($customer->email)->send(new WelcomeMail($data));
                 Mail::to($customer->email)->send(new TestMail());*/
 
-        return redirect()->back();
+        Session::put('customer_id', $customer->id);
+        Session::put('customer_name', $customer->name);
+
+        if (Cart::isEmpty()) {
+            return redirect()->route('customer.dashboard');
+        } else {
+            return redirect()->route('checkout');
+        }
     }
 
-    public function register()
+    public function reg_form()
     {
 
         return view('frontend.customer.register');

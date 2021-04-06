@@ -29,8 +29,8 @@
                             </div><!-- End .product-details -->
 
                             <figure class="product-image-container">
-                                <a href="product.html" class="product-image">
-                                    <img src="{{asset('uploads/'.$item->thumbnail)}}" alt="product"
+                                <a href="{{route('product',$item->attributes->slug)}}" class="product-image">
+                                    <img src="{{asset('uploads/'.$item->attributes->image)}}" alt="product"
                                          width="80" height="80">
                                 </a>
                                 <a href="#" class="btn-remove icon-cancel item-remove" data-id="{{$item->id}}" title="Remove Product"></a>
@@ -46,7 +46,7 @@
                 </div><!-- End .dropdown-cart-total -->
 
                 <div class="dropdown-cart-action">
-                    <a href="checkout-shipping.html" class="btn btn-dark btn-block">Checkout</a>
+                    <a href="{{route('checkout')}}" class="btn btn-dark btn-block">Checkout</a>
                 </div><!-- End .dropdown-cart-total -->
                 @else
                     <p class="text-center p-4">YOUR SHOPPING <br/>BAG IS EMPTY</p>

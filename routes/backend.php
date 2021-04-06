@@ -4,6 +4,7 @@ use App\Http\Controllers\Staff\BrandController;
 use App\Http\Controllers\Staff\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Staff\ProductController;
+use App\Http\Controllers\Staff\OrderController;
 
 Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -19,4 +20,10 @@ Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::post('product/update-status',[ProductController::class,'update_status'])->name('product.status');
     Route::post('product/featured/{id}',[ProductController::class,'featured'])->name('product.featured');
     Route::post('product/update-price/{id}',[ProductController::class,'update_price'])->name('product.update.price');
+
+    Route::prefix('orders')->name('orders')->group(function (){
+        Route::get('/',[OrderController::class,'index']);
+    });
+
+
 });

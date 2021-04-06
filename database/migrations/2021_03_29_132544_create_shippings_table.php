@@ -17,7 +17,7 @@ class CreateShippingsTable extends Migration
             $table->id();
             $table->string('first_name','35');
             $table->string('last_name','35');
-            $table->string('phone','11')->unique();
+            $table->string('phone','11');
             $table->string('address');
             $table->timestamps();
         });

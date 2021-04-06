@@ -21,6 +21,7 @@
 
             <div class="form-footer">
                 <button type="submit" class="btn btn-primary">LOGIN</button>
+                <a href="{{route('customer.register.form')}}" class="forget-pass"> Register </a>
                 <a href="#" class="forget-pass"> Forgot your password?</a>
             </div><!-- End .form-footer -->
         </form>

@@ -20,7 +20,7 @@ class PaymentSeeder extends Seeder
         foreach (range(1, 25) as $index) {
             Payment::create([
                 'order_id'=> rand(1,25),
-                'type'=>'bKash',
+                'payment_type'=>'bKash',
                 'status'=> $this->randomStatus()
           ]);
         }

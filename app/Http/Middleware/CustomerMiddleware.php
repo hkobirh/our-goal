@@ -18,10 +18,10 @@ class CustomerMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(!Session::get('customer_id')){
+        if(Session::get('customer_id')){
             return $next($request);
         }else{
-            return redirect('/');
+            return redirect()->route('customer.login');
         }
 
     }

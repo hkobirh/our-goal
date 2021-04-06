@@ -37,14 +37,21 @@ Route::post('/ajax/cart/remove',[CartController::class,'ajax_cart_remove']);
 
 
 Route::prefix('auth')->name('customer.')->group(function(){
-    Route::post('/login',[CustomerController::Class,'login_form'])->name('login');
-    Route::get('/login',[CustomerController::Class,'login'])->name('login.form');
-    Route::post('/register',[CustomerController::Class,'reg_form'])->name('register.form');
-    Route::get('/register',[CustomerController::Class,'register'])->name('register');
+    Route::get('/login',[CustomerController::Class,'login_form'])->name('login.form');
+    Route::post('/login',[CustomerController::Class,'login'])->name('login');
+    Route::get('/register',[CustomerController::Class,'reg_form'])->name('register.form');
+    Route::post('/register',[CustomerController::Class,'register'])->name('register');
     Route::get('/logout',[CustomerController::class,'logout'])->name('logout');
 });
 
-Route::get('/customer',[CustomerController::class,'index'])->name('customer');
+Route::get('/customer/dashboard',[CustomerController::class,'index'])->name('customer.dashboard');
+Route::get('/checkout',[CustomerController::class,'checkout'])->name('checkout');
+Route::post('/checkout/shipping',[CustomerController::class,'shipping'])->name('shipping');
+Route::get('/checkout/review-payments',[CustomerController::class,'review_payments'])->name('review.payments');
+Route::post('/checkout/new-order',[CustomerController::class,'new_order'])->name('order');
+
+
+Route::get('/order/success',[CustomerController::class,'order_success'])->name('order.success');
 
 
 Route::get('all-products', [FrontendProductController::class,'index']);

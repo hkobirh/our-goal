@@ -6,7 +6,7 @@
     <main class="main">
         <div class="category-banner-container bg-gray">
             <div class="category-banner banner text-uppercase"
-                 style="background: no-repeat 60%/cover url({{ asset('theme/frontend/assets/images/banners/banner-top.jpg') }});">
+                 style="background: no-repeat 60%/cover url({{ asset('theme/frontend/assets/images/page-header-bg.jpg') }});">
                 <div class="container position-relative">
                     <div class="row">
                         <div class="pl-lg-5 pb-5 pb-md-0 col-md-5 col-xl-4 col-lg-4 offset-1">

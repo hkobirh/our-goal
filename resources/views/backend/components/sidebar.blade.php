@@ -38,6 +38,12 @@
                 <div class="menu-title">Products</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('staff.orders') }}">
+                <div class="parent-icon icon-color-1"><i class="bx bx-list-ol"></i></div>
+                <div class="menu-title">Orders</div>
+            </a>
+        </li>
 
 {{--        <li>--}}
 {{--            <a href="#" class="has-arrow">--}}

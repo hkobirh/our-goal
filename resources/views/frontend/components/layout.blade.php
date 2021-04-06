@@ -31,6 +31,7 @@
 <div class="page-wrapper">
     @include('frontend.components.header')
     <main class="main">
+        @yield('menu')
         @yield('content')
     </main><!-- End .main -->
     @include('frontend.components.footer')

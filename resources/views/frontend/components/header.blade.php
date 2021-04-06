@@ -42,11 +42,11 @@
                     <a href="#">Links</a>
                     <div class="header-menu">
                         <ul>
-                            <li><a href="my-account.html">Track Order </a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="category.html">Our Stores</a></li>
+                            <li><a href="">Track Order </a></li>
+                            <li><a href="l">About</a></li>
+                            <li><a href="">Our Stores</a></li>
                             @if(Session::get('customer_id'))
-                                <li><a href="{{route('customer')}}">Dashboard</a></li>
+                                <li><a href="{{route('customer.dashboard')}}">My Dashboard</a></li>
                                 <li><a href="{{route('customer.logout')}}">Logout</a></li>
                             @else
                                 <li><a href="{{route('customer.login.form')}}">Login</a></li>
@@ -112,4 +112,5 @@
             </div><!-- End .header-right -->
         </div><!-- End .container -->
     </div><!-- End .header-middle -->
+    @yield('stiky_head')
 </header><!-- End .header -->
