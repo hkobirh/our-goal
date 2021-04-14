@@ -20,9 +20,9 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
 
             <div class="form-footer">
-                <button type="submit" class="btn btn-primary">LOGIN</button>
-                <a href="{{route('customer.register.form')}}" class="forget-pass"> Register </a>
-                <a href="#" class="forget-pass"> Forgot your password?</a>
+                <button type="submit" class="btn btn-primary btn-sm" style="border-radius: 62px">LOGIN</button>
+                <a href="#" class="forget-pass" style="text-decoration: none;font-size: 15px"> Forgot your password ?</a>
+                <a href="{{route('customer.register.form')}}" class="forget-pass p-4" style="text-decoration: none; font-size: 15px"> Register </a>
             </div><!-- End .form-footer -->
         </form>
     </div>

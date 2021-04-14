@@ -17,9 +17,10 @@
                     <div class="product-slider-container">
                         <div class="product-single-carousel owl-carousel owl-theme">
                             @foreach(json_decode($product->image) as $image)
-                            <div class="product-item">
-                                <img class="product-single-image" src="{{asset('uploads/products/'.$image)}}" data-zoom-image="{{asset('uploads/products/'.$image)}}"/>
-                            </div>
+                                <div class="product-item">
+                                    <img class="product-single-image" src="{{asset('uploads/products/'.$image)}}"
+                                         data-zoom-image="{{asset('uploads/products/'.$image)}}"/>
+                                </div>
                             @endforeach
                         </div>
                         <!-- End .product-single-carousel -->
@@ -29,9 +30,9 @@
                     </div>
                     <div class="prod-thumbnail owl-dots" id='carousel-custom-dots'>
                         @foreach(json_decode($product->image) as $image)
-                        <div class="owl-dot">
-                            <img src="{{asset('uploads/products/'.$image)}}"/>
-                        </div>
+                            <div class="owl-dot">
+                                <img src="{{asset('uploads/products/'.$image)}}"/>
+                            </div>
                         @endforeach
                     </div>
                 </div><!-- End .product-single-gallery -->
@@ -55,7 +56,9 @@
 
                     <div class="product-desc">
                         <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolre eu fugiat nulla pariatur excepteur sint occaecat cupidatat non. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolre eu fugiat nulla
+                            pariatur excepteur sint occaecat cupidatat non. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse.
                             <a href="#">(read more)</a>
                         </p>
                     </div><!-- End .product-desc -->
@@ -65,9 +68,9 @@
                             <label>Colors:</label>
                             <ul class="config-swatch-list">
                                 @foreach($colors as $color)
-                                <li class="color-item" data-value="{{$color}}">
-                                    <a href="javascript:" style="background-color: {{$color}};"></a>
-                                </li>
+                                    <li class="color-item" data-value="{{$color}}">
+                                        <a href="javascript:" style="background-color: {{$color}};"></a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -75,7 +78,7 @@
                             <label>Sizes:</label>
                             <ul class="config-size-list">
                                 @foreach($sizes as $size)
-                                <li class="size-item"><a href="javascript:">{{$size}}</a></li>
+                                    <li class="size-item"><a href="javascript:">{{$size}}</a></li>
                                 @endforeach
                             </ul>
                         </div><!-- End .product-single-filter -->
@@ -88,7 +91,8 @@
                             <input class="horizontal-quantity form-control" type="text">
                         </div><!-- End .product-single-qty -->
 
-                        <a href="" class="btn btn-dark add-cart icon-shopping-cart add-to-cart" data-id="{{$product->id}}" title="Add to Cart">Add to Cart</a>
+                        <a href="" class="btn btn-dark add-cart icon-shopping-cart add-to-cart"
+                           data-id="{{$product->id}}" title="Add to Cart">Add to Cart</a>
                     </div><!-- End .product-action -->
 
                     <hr class="divider mb-1">
@@ -97,10 +101,14 @@
                         <label class="sr-only">Share:</label>
 
                         <div class="social-icons mr-2">
-                            <a href="#" class="social-icon social-facebook icon-facebook" target="_blank" title="Facebook"></a>
-                            <a href="#" class="social-icon social-twitter icon-twitter" target="_blank" title="Twitter"></a>
-                            <a href="#" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank" title="Linkedin"></a>
-                            <a href="#" class="social-icon social-gplus fab fa-google-plus-g" target="_blank" title="Google +"></a>
+                            <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"
+                               title="Facebook"></a>
+                            <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"
+                               title="Twitter"></a>
+                            <a href="#" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank"
+                               title="Linkedin"></a>
+                            <a href="#" class="social-icon social-gplus fab fa-google-plus-g" target="_blank"
+                               title="Google +"></a>
                             <a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
                         </div><!-- End .social-icons -->
 
@@ -113,34 +121,48 @@
         <div class="product-single-tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="product-tab-desc" data-toggle="tab" href="#product-desc-content" role="tab" aria-controls="product-desc-content" aria-selected="true">Description</a>
+                    <a class="nav-link active" id="product-tab-desc" data-toggle="tab" href="#product-desc-content"
+                       role="tab" aria-controls="product-desc-content" aria-selected="true">Description</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-tab-more-info" data-toggle="tab" href="#product-more-info-content" role="tab" aria-controls="product-more-info-content" aria-selected="false">More Info</a>
+                    <a class="nav-link" id="product-tab-more-info" data-toggle="tab" href="#product-more-info-content"
+                       role="tab" aria-controls="product-more-info-content" aria-selected="false">More Info</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-tab-tags" data-toggle="tab" href="#product-tags-content" role="tab" aria-controls="product-tags-content" aria-selected="false">Tags</a>
+                    <a class="nav-link" id="product-tab-tags" data-toggle="tab" href="#product-tags-content" role="tab"
+                       aria-controls="product-tags-content" aria-selected="false">Tags</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content" role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (3)</a>
+                    <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content"
+                       role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (3)</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel" aria-labelledby="product-tab-desc">
+                <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel"
+                     aria-labelledby="product-tab-desc">
                     <div class="product-desc-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
                         <ul>
-                            <li><i class="fa fa-check-circle"></i>Any Product types that You want - Simple, Configurable</li>
+                            <li><i class="fa fa-check-circle"></i>Any Product types that You want - Simple, Configurable
+                            </li>
                             <li><i class="fa fa-check-circle"></i>Downloadable/Digital Products, Virtual Products</li>
                             <li><i class="fa fa-check-circle"></i>Inventory Management with Backordered items</li>
                         </ul>
-                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <br>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            <br>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                     </div><!-- End .product-desc-content -->
                 </div><!-- End .tab-pane -->
 
-                <div class="tab-pane fade fade" id="product-more-info-content" role="tabpanel" aria-labelledby="product-tab-more-info">
+                <div class="tab-pane fade fade" id="product-more-info-content" role="tabpanel"
+                     aria-labelledby="product-tab-more-info">
                     <div class="product-desc-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
                     </div><!-- End .product-desc-content -->
                 </div><!-- End .tab-pane -->
 
@@ -157,16 +179,18 @@
                     </div><!-- End .product-tags-content -->
                 </div><!-- End .tab-pane -->
 
-                <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews">
+                <div class="tab-pane fade" id="product-reviews-content" role="tabpanel"
+                     aria-labelledby="product-tab-reviews">
                     <div class="product-reviews-content">
                         <div class="row">
                             <div class="col-xl-7">
-                                <h2 class="reviews-title">3 reviews for Product Long Name</h2>
+                                <h2 class="reviews-title">0 reviews for Product</h2>
 
                                 <ol class="comment-list">
                                     <li class="comment-container">
                                         <div class="comment-avatar">
-                                            <img src="assets/images/avatar/avatar1.jpg" width="65" height="65" alt="avatar"/>
+                                            <img src="assets/images/avatar/avatar1.jpg" width="65" height="65"
+                                                 alt="avatar"/>
                                         </div><!-- End .comment-avatar-->
 
                                         <div class="comment-box">
@@ -181,51 +205,10 @@
                                             </div><!-- End .comment-info -->
 
                                             <div class="comment-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                                            </div><!-- End .comment-text -->
-                                        </div><!-- End .comment-box -->
-                                    </li><!-- comment-container -->
-
-                                    <li class="comment-container">
-                                        <div class="comment-avatar">
-                                            <img src="assets/images/avatar/avatar2.jpg" width="65" height="65" alt="avatar"/>
-                                        </div><!-- End .comment-avatar-->
-
-                                        <div class="comment-box">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .ratings-container -->
-
-                                            <div class="comment-info mb-1">
-                                                <h4 class="avatar-name">John Doe</h4> - <span class="comment-date">Novemeber 15, 2019</span>
-                                            </div><!-- End .comment-info -->
-
-                                            <div class="comment-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                                            </div><!-- End .comment-text -->
-                                        </div><!-- End .comment-box -->
-                                    </li><!-- comment-container -->
-
-                                    <li class="comment-container">
-                                        <div class="comment-avatar">
-                                            <img src="assets/images/avatar/avatar3.jpg" width="65" height="65" alt="avatar"/>
-                                        </div><!-- End .comment-avatar-->
-
-                                        <div class="comment-box">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .ratings-container -->
-
-                                            <div class="comment-info mb-1">
-                                                <h4 class="avatar-name">John Doe</h4> - <span class="comment-date">Novemeber 15, 2019</span>
-                                            </div><!-- End .comment-info -->
-
-                                            <div class="comment-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip.</p>
                                             </div><!-- End .comment-text -->
                                         </div><!-- End .comment-box -->
                                     </li><!-- comment-container -->
@@ -234,18 +217,19 @@
 
                             <div class="col-xl-5">
                                 <div class="add-product-review">
-                                    <form action="#" class="comment-form m-0">
+                                    <form action="{{route('review.create')}}" method="post" class="comment-form m-0 create-review">
+                                        @csrf
                                         <h3 class="review-title">Add a Review</h3>
 
                                         <div class="rating-form">
                                             <label for="rating">Your rating</label>
                                             <span class="rating-stars">
-														<a class="star-1" href="#">1</a>
-														<a class="star-2" href="#">2</a>
-														<a class="star-3" href="#">3</a>
-														<a class="star-4" href="#">4</a>
-														<a class="star-5" href="#">5</a>
-													</span>
+                                                <a class="star-1" href="#">1</a>
+                                                <a class="star-2" href="#">2</a>
+                                                <a class="star-3" href="#">3</a>
+                                                <a class="star-4" href="#">4</a>
+												<a class="star-5" href="#">5</a>
+											</span>
 
                                             <select name="rating" id="rating" required="" style="display: none;">
                                                 <option value="">Rate…</option>
@@ -259,25 +243,8 @@
 
                                         <div class="form-group">
                                             <label>Your Review</label>
-                                            <textarea cols="5" rows="6" class="form-control form-control-sm"></textarea>
+                                            <textarea cols="5" rows="4" name="message" class="form-control form-control-sm"></textarea>
                                         </div><!-- End .form-group -->
-
-
-                                        <div class="row">
-                                            <div class="col-md-6 col-xl-12">
-                                                <div class="form-group">
-                                                    <label>Your Name</label>
-                                                    <input type="text" class="form-control form-control-sm" required>
-                                                </div><!-- End .form-group -->
-                                            </div>
-
-                                            <div class="col-md-6 col-xl-12">
-                                                <div class="form-group">
-                                                    <label>Your E-mail</label>
-                                                    <input type="text" class="form-control form-control-sm" required>
-                                                </div><!-- End .form-group -->
-                                            </div>
-                                        </div>
 
                                         <input type="submit" class="btn btn-dark ls-n-15" value="Submit">
                                     </form>

@@ -20,11 +20,11 @@ class OrderSeeder extends Seeder
         foreach (range(0, 50) as $index) {
 
             Order::create([
-                'customer_id' => rand(1, 50),
-                'shipping_id' => rand(1, 50),
-                'total' => rand(100, 500),
+                'customer_id'   => rand(1, 50),
+                'shipping_id'   => rand(1, 50),
+                'total'         => rand(100, 500),
                 'shipping_cost' => 60,
-                'status' => $this->randomStatus()
+                'status'        => $this->randomStatus()
             ]);
         }
     }

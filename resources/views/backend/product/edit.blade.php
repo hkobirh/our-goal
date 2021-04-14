@@ -63,7 +63,7 @@
                                     <label for="category">Select Category Name: </label>
                                     <select class="form-control category radius-5" name="category" id="advance-select">
                                         <option value="0">Root</option>
-                                        {!! categories_select_data($categories , 3)!!}
+                                        {!! categories_select_data($categories , 2, )!!}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -196,7 +196,7 @@
                                     <label> Product Thumbnail : </label><br>
                                     <input id="thumbnail" type="file" name="thumbnail">
                                     <div class="thumbnail ml-2 mt-2">
-                                        <img src="{{asset('uploads/products/'.$product->thumbnail)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
+                                        <img src="{{asset('uploads/'.$product->thumbnail)}}" class="img-fluid img-thumbnail" style="height: 100px; width: 100px;">
                                     </div>
                                 </div>
                                 <div class=" form-group col-md-6 ">

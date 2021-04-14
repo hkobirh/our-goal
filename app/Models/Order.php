@@ -19,7 +19,7 @@ class Order extends Model
 
     }
     public function order_items(){
-        return $this->hasMany(OrderInfo::class,'order_id')->select('id','order_id','product_id','product_name','product_price','product_qty');
+        return $this->hasMany(OrderInfo::class,'order_id')->select('id','order_id','product_id','product_name','product_price','product_qty',);
     }
     public function payment(){
         return $this->belongsTo(Payment::class,'id','order_id')->select('id','order_id','payment_type','status');

@@ -39,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('staff.orders') }}">
+            <a href="{{ route('staff.orders.index') }}">
                 <div class="parent-icon icon-color-1"><i class="bx bx-list-ol"></i></div>
                 <div class="menu-title">Orders</div>
             </a>

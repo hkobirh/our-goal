@@ -1,3 +1,5 @@
+
+
 <div class="top-notice text-white bg-dark">
     <div class="container text-center">
         <h5 class="d-inline-block mb-0 mr-2">Get Up to <b>40% OFF</b> New-Season Styles</h5>
@@ -75,7 +77,7 @@
                     <i class="icon-menu"></i>
                 </button>
                 <a href="{{route('index')}}" class="logo">
-                    <img src="{{asset('theme/frontend/assets/images/logo.png')}}" alt="Porto Logo">
+                    <img src="{{asset('theme/frontend/assets/images/1.png')}}" alt="Porto Logo">
                 </a>
             </div><!-- End .header-left -->
 
@@ -88,7 +90,8 @@
                             <div class="select-custom">
                                 <select id="cat" name="cat">
                                     <option value="">All Categories</option>
-                                    <option value="4">Fashion</option>
+{{--                                    <option value="0">__ROOT__</option>
+                                    {!! categories_select_data($categories,2) !!}--}}
                                 </select>
                             </div><!-- End .select-custom -->
                             <button class="btn p-0 icon-search-3" type="submit"></button>
@@ -98,8 +101,7 @@
 
                 <div class="header-contact d-none d-lg-flex align-items-center pr-xl-5 mr-3 ml-xl-5">
                     <i class="icon-phone-2"></i>
-                    <h6 class="pt-1 line-height-1">Call us now<a href="tel:#" class="d-block text-dark ls-10 pt-1">+123
-                            5678 890</a></h6>
+                    <h6 class="pt-1 line-height-1">Call us now<a href="tel:#" class="d-block text-dark ls-10 pt-1">01722-879377</a></h6>
                 </div><!-- End .header-contact -->
 
                 <a href="login.html" class="header-icon login-link"><i class="icon-user-2"></i></a>

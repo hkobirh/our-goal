@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         $faker = Factory::create();
         foreach (range(1, 500) as $index) {
-            $name = substr($faker->unique()->paragraph(),0,30);
+            $name = substr($faker->unique()->paragraph(),0,40);
             Product::create([
                 'name' => $name,
                 'slug' => slugify($name),

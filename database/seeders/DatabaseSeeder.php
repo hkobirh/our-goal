@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductReview;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
             ShippingSeeder::class,
             OrderSeeder::class,
             OrderInfoSeeder::class,
-            PaymentSeeder::class
+            PaymentSeeder::class,
+            ItemsReviewSeeder::class
         ]);
     }
 }

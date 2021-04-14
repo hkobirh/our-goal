@@ -21,8 +21,11 @@ Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::post('product/featured/{id}',[ProductController::class,'featured'])->name('product.featured');
     Route::post('product/update-price/{id}',[ProductController::class,'update_price'])->name('product.update.price');
 
-    Route::prefix('orders')->name('orders')->group(function (){
-        Route::get('/',[OrderController::class,'index']);
+    Route::prefix('orders')->name('orders.')->group(function (){
+        Route::get('/',[OrderController::class,'index'])->name('index');
+        Route::get('/{id}/details',[OrderController::class,'show'])->name('details');
+        Route::get('/{id}/invoice',[OrderController::class,'invoice'])->name('invoice');
+        Route::get('/{id}/invoice/print',[OrderController::class,'invoice_print'])->name('print');
     });
 
 

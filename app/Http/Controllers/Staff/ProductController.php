@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::with('user', 'brand', 'category')->paginate(10);
-        return view('backend.product.manage', compact('data'));
+        return view('backend.product.pagination', compact('data'));
     }
 
     public function fetch_data(Request $request)
@@ -40,7 +40,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $brands = Brand::select('id', 'name')->get();
+        $brands     = Brand::select('id', 'name')->get();
         $categories = Category::where('root', 0)->get();
         return view('backend.product.create', compact('categories', 'brands'));
     }
@@ -54,13 +54,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'slug' => 'required|unique:products',
-            'category' => 'required',
-            'brand' => 'required',
-            'buying_price' => 'required',
+            'name'          => 'required',
+            'slug'          => 'required|unique:products',
+            'category'      => 'required',
+            'brand'         => 'required',
+            'buying_price'  => 'required',
             'selling_price' => 'required',
-            'status' => 'required'
+            'status'        => 'required'
         ]);
         if ($validator->fails())
             return response()->json([
@@ -68,12 +68,12 @@ class ProductController extends Controller
             ]);
         else {
             try {
-                $thumbnail = $request->file('thumbnail');
+                $thumbnail     = $request->file('thumbnail');
                 $thumbnailName = date('Ymdhms.') . $thumbnail->getClientOriginalExtension();
                 Image::make($thumbnail)->resize(300, 300)->save(public_path('uploads/products/' . $thumbnailName));
 
-                $images = $request->file('image');
-                $i = 0;
+                $images    = $request->file('image');
+                $i         = 0;
                 $imageName = [];
                 foreach ($images as $image) {
                     $name = date('Ymdhms') . $i++ . '.' . $image->getClientOriginalExtension();
@@ -82,28 +82,28 @@ class ProductController extends Controller
                 }
 
                 Product::create([
-                    'name' => $request->name,
-                    'slug' => $request->slug,
-                    'category_id' => $request->category,
-                    'brand_id' => $request->brand,
-                    'model' => $request->model,
-                    'buying_price' => $request->buying_price,
-                    'selling_price' => $request->selling_price,
-                    'special_price' => $request->special_price,
-                    'special_price_from' => $request->special_price_from,
-                    'special_price_to' => $request->special_price_to,
-                    'quantity' => $request->quantity,
-                    'sku_code' => $request->sku_code,
-                    'color' => $request->color ? json_encode($request->color) : '[]',
-                    'size' => $request->size ? json_encode($request->size) : '[]',
-                    'thumbnail' => $thumbnailName,
-                    'image' => json_encode($imageName),
-                    'warranty' => $request->warranty,
-                    'warranty_duration' => $request->warranty_duration,
+                    'name'                => $request->name,
+                    'slug'                => $request->slug,
+                    'category_id'         => $request->category,
+                    'brand_id'            => $request->brand,
+                    'model'               => $request->model,
+                    'buying_price'        => $request->buying_price,
+                    'selling_price'       => $request->selling_price,
+                    'special_price'       => $request->special_price,
+                    'special_price_from'  => $request->special_price_from,
+                    'special_price_to'    => $request->special_price_to,
+                    'quantity'            => $request->quantity,
+                    'sku_code'            => $request->sku_code,
+                    'color'               => $request->color ? json_encode($request->color) : '[]',
+                    'size'                => $request->size ? json_encode($request->size) : '[]',
+                    'thumbnail'           => $thumbnailName,
+                    'image'               => json_encode($imageName),
+                    'warranty'            => $request->warranty,
+                    'warranty_duration'   => $request->warranty_duration,
                     'warranty_conditions' => $request->warranty_conditions,
-                    'description' => $request->description,
-                    'status' => $request->status,
-                    'create_by' => auth()->id()
+                    'description'         => $request->description,
+                    'status'              => $request->status,
+                    'create_by'           => auth()->id()
                 ]);
                 return response()->json(['success' => 'Yea, A product has been successfully created.']);
 
@@ -132,8 +132,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        $brands = Brand::select('id', 'name')->get();
+        $product    = Product::find($id);
+        $brands     = Brand::select('id', 'name')->get();
         $categories = Category::where('root', 0)->get();
         return view('backend.product.edit', compact('brands', 'categories', 'product'));
     }
@@ -176,7 +176,7 @@ class ProductController extends Controller
         if ($request->ajax()) {
             if (!empty($request->checkbox)) {
                 foreach ($request->checkbox as $checkbox) {
-                    $product = Product::find($checkbox);
+                    $product         = Product::find($checkbox);
                     $product->status = $request->status;
                     $product->save();
                 }
@@ -189,7 +189,7 @@ class ProductController extends Controller
     public function update_price(Request $request, $id)
     {
         if ($request->ajax()) {
-            $product = Product::find($id);
+            $product               = Product::find($id);
             $product->buying_price = $request->var_price;
             $product->save();
         }
@@ -198,8 +198,8 @@ class ProductController extends Controller
     public function featured(Request $request, $id)
     {
         if ($request->ajax()) {
-            $product = Product::find($id);
-            $product->featured = $product->featured ? 0 : 1 ;
+            $product           = Product::find($id);
+            $product->featured = $product->featured ? 0 : 1;
             $product->save();
         }
     }

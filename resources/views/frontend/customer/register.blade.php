@@ -19,9 +19,9 @@
 <div class="card">
     <div class="card-header">
         <div class="heading">
-            <h2 class="title">Create An Account</h2>
+            <h2 class="title text-info text-center">Create An Account</h2>
             <x-auth-validation-errors></x-auth-validation-errors>
-            <p>By creating an account with our store, you will be able to
+            <p class="text-info"><b>Message:</b> By creating an account with our store, you will be able to
                 move through the checkout process faster, store multiple shipping addresses,
                 view and track your orders in your account and more.</p>
         </div><!-- End .heading -->
@@ -32,7 +32,7 @@
             <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
             <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
 
-            <h2 class="title mb-2">Login information</h2>
+            <h2 class="title mb-2 text-info text-center">Login information</h2>
             <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             <input type="text" class="form-control" name="phone" placeholder="01*********" required pattern="01[1|3|4|5|6|7|8|9][0-9]{8}">
             <input type="password" class="form-control" name="password" placeholder="Password">
@@ -43,7 +43,7 @@
             </div><!-- End .custom-checkbox -->
 
             <div class="form-footer">
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary btn-sm" style="border-radius: 62px">Create Account</button>
             </div><!-- End .form-footer -->
         </form>
     </div>

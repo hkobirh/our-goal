@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\FrontendProductController;
 use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CustomerController;
+use App\Http\Controllers\Site\ItemReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::get('/products/{slug1}/{slug2}/{slug3?}', [SiteController::class,'product
 Route::get('/product/{slug}', [SiteController::class,'product'])->name('product');
 Route::post('/product-quick-view/{slug}', [SiteController::class,'product_quick_view'])->name('product.quick.view');
 Route::get('/brand/{slug}', [SiteController::class,'brand'])->name('brand');
+
+Route::post('/review/create', [ItemReviewController::class,'store'])->name('review.create');
+
+Route::post('load-more-data', [SiteController::class,'load_more_data'])->name('load_more_data');
 
 
 

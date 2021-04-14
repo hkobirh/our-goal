@@ -15,8 +15,9 @@ class SiteController extends Controller
         $categories = Category::where('root', Category::RootCategory)
             ->where('status', Category::ActiveCategory)
             ->get();
+        $featured = Product::where('featured', 1)->active()->get();
 
-        return view('frontend.home', compact('categories'));
+        return view('frontend.home', compact('categories','featured'));
     }
 
 
@@ -75,6 +76,16 @@ class SiteController extends Controller
         return view('frontend.product_quick_view', compact('product','images'));
     }
 
-
+    public function load_more_data(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->id) {
+                $data = Product::where('brand_id',2)->where('id','<',$request->id)->where('status','active')->orderBy('id','DESC')->limit(15)->get();
+            }else{
+                $data = Product::where('brand_id',2)->where('status','active')->orderBy('id','DESC')->limit(15)->get();
+            }
+            return view('frontend.products',compact('data'));
+        }
+    }
 }
 

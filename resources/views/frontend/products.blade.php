@@ -6,7 +6,7 @@
     <main class="main">
         <div class="category-banner-container bg-gray">
             <div class="category-banner banner text-uppercase"
-                 style="background: no-repeat 60%/cover url({{ asset('theme/frontend/assets/images/page-header-bg.jpg') }});">
+                 style="background: no-repeat 60%/cover url({{ asset('theme/frontend/assets/images/page-header-bg-1.jpg') }});">
                 <div class="container position-relative">
                     <div class="row">
                         <div class="pl-lg-5 pb-5 pb-md-0 col-md-5 col-xl-4 col-lg-4 offset-1">
@@ -36,56 +36,13 @@
             </nav>
             <div class="row">
                 <div class="col-lg-9 main-content">
-                    <nav class="toolbox">
-                        <div class="toolbox-left">
-                            <div class="toolbox-item toolbox-sort">
-                                <label>Sort By:</label>
-
-                                <div class="select-custom">
-                                    <select name="orderby" class="form-control">
-                                        <option value="menu_order" selected="selected">Default sorting</option>
-                                        <option value="popularity">Sort by popularity</option>
-                                        <option value="rating">Sort by average rating</option>
-                                        <option value="date">Sort by newness</option>
-                                        <option value="price">Sort by price: low to high</option>
-                                        <option value="price-desc">Sort by price: high to low</option>
-                                    </select>
-                                </div><!-- End .select-custom -->
-
-
-                            </div><!-- End .toolbox-item -->
-                        </div><!-- End .toolbox-left -->
-
-                        <div class="toolbox-right">
-                            <div class="toolbox-item toolbox-show">
-                                <label>Show:</label>
-
-                                <div class="select-custom">
-                                    <select name="count" class="form-control">
-                                        <option value="12">12</option>
-                                        <option value="24">24</option>
-                                        <option value="36">36</option>
-                                    </select>
-                                </div><!-- End .select-custom -->
-                            </div><!-- End .toolbox-item -->
-
-                            <div class="toolbox-item layout-modes">
-                                <a href="category.html" class="layout-btn btn-grid active" title="Grid">
-                                    <i class="icon-mode-grid"></i>
-                                </a>
-                                <a href="category-list.html" class="layout-btn btn-list" title="List">
-                                    <i class="icon-mode-list"></i>
-                                </a>
-                            </div><!-- End .layout-modes -->
-                        </div><!-- End .toolbox-right -->
-                    </nav>
                     <div class="row">
                         @foreach($products as $product)
                             @php($s_price = false)
                            @if($product->special_price_from <= date('Y-m-d') && $product->special_price_to >= date('Y-m-d'))
                                @php($s_price = true)
                             @endif
-                            <div class="col-6 col-sm-4 col-md-3">
+                            <div class="col-6 col-sm-4 col-md-3" id="product_data">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
                                         <a href="{{route('product',$product->slug)}}">
@@ -99,15 +56,6 @@
                                         <div class="btn-icon-group">
 
                                             <button class="btn-icon btn-add-cart add-to-cart" data-id="{{$product->id}}"><i class="icon-shopping-cart"></i></button>
-
-
-{{--
-                                            <form action="{{route('cart.add')}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{$product->id}}">
-                                                <button class="btn-icon btn-add-cart" data-target="" type="submit"><i class="icon-shopping-cart"></i></button>
-                                            </form>--}}
-
 
                                         </div>
                                         <a href="{{route('product.quick.view',$product->slug)}}" class="btn-quickview">Quick View</a>
@@ -141,6 +89,7 @@
                             </div><!-- End .col-sm-4 -->
                         @endforeach
                     </div>
+                    <button class="btn btn-info" id="loadMoreBtn">Load more</button>
                 </div><!-- End .col-lg-9 -->
 
                 <div class="sidebar-overlay"></div>
@@ -262,3 +211,26 @@
 
 
 @endsection
+
+
+@push('js')
+    <script>
+        load_more_data();
+        function load_more_data(id=""){
+            $.ajax({
+                url: {{route('load_more_data')}},
+                type: 'post',
+                data:{id:id},
+                success: function (data){
+                    $('#loadMoreBtn').remove();
+                    $('#product_data').append(data);
+                }
+            })
+        }
+
+        $('body').on('click','#loadMoreBtn',function (){
+            let id = $(this).data('id');
+            load_more_data(id);
+        })
+    </script>
+@endpush

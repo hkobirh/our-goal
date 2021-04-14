@@ -40,12 +40,17 @@
                             <td>{{$item->customer->full_name}}</td>
                             <td>{{$item->customer->phone}}</td>
                             <td>{{$item->total}}</td>
-                            <td>{{$item->status}}</td>
-                            <td>{{$item->status}}</td>
+                            <td class="text-capitalize">{{$item->status}}</td>
+                            <td class="text-capitalize">{{$item->payment->status}}</td>
                             <td>
-                                <button class="btn btn-danger btn-sm">
-                                    Delete
-                                </button>
+                                <div class="btn-group m-1 btn-group-sm" role="group" aria-label="Basic example">
+                                    <a href="{{route('staff.orders.details', $item->id)}}" class="btn btn-outline-info"><i class="bx bx-info-circle"></i>
+                                    </a>
+                                    <a href="" class="btn btn-outline-dark"><i class="bx bx-pencil"></i>
+                                    </a>
+                                    <a href="{{route('staff.orders.invoice', $item->id)}}" class="btn btn-outline-danger"><i class="bx bx-download"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
