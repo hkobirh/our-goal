@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\ItemsReview;
+use Illuminate\Support\Facades\session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Exception;
 
 class ItemReviewController extends Controller
 {
@@ -30,18 +34,38 @@ class ItemReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            "rating"  => "required|in:1,2,3,4,5",
+            "message" => "required|string"
+        ]);
+        if ($validator->fails())
+            return response()->json(['error' => $validator->errors()]);
+        else {
+            try {
+                ItemsReview::create([
+                    "customer_id" => session::get('customer_id'),
+                    "product_id"  => $request->product,
+                    "rating"      => $request->rating,
+                    "message"     => $request->message
+                ]);
+                return response()->json(['success' => 'Yea, A product review has been successfully created.']);
+
+            } catch (Exception $e) {
+                return response()->json(['error' => 'Unable to review for the product']);
+            }
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +76,7 @@ class ItemReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +87,8 @@ class ItemReviewController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +99,7 @@ class ItemReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

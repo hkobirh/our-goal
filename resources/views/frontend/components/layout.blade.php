@@ -26,6 +26,7 @@
           href="{{asset('theme/frontend/assets/vendor/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" type="text/css"
           href="{{asset('theme/frontend/assets/vendor/simple-line-icons/css/simple-line-icons.min.css')}}">
+
 </head>
 <body>
 <div class="page-wrapper">
@@ -80,7 +81,7 @@
 <script src="{{asset('theme/frontend/assets/js/plugins.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/toastr.min.js')}}"></script>
 <script src="{{asset('theme/frontend/assets/js/custom.js')}}"></script>
-
+@stack('JS')
 <!-- Main JS File -->
 <script src="{{asset('theme/frontend/assets/js/main.min.js')}}"></script>
 </body>

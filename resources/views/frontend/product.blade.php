@@ -42,10 +42,10 @@
 
                     <div class="ratings-container">
                         <div class="product-ratings">
-                            <span class="ratings" style="width:60%"></span><!-- End .ratings -->
+                            <span class="ratings" style="width:{{$product->get_rating()*20}}%"></span><!-- End .ratings -->
                         </div><!-- End .product-ratings -->
 
-                        <a href="#" class="rating-link">( 6 Reviews )</a>
+                        <a href="#" class="rating-link">( {{$reviews->count()}} Reviews )</a>
                     </div><!-- End .ratings-container -->
 
                     <hr class="short-divider">
@@ -134,7 +134,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content"
-                       role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (3)</a>
+                       role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews
+                        ( {{$reviews->count()}} )</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -184,46 +185,68 @@
                     <div class="product-reviews-content">
                         <div class="row">
                             <div class="col-xl-7">
-                                <h2 class="reviews-title">0 reviews for Product</h2>
+                                <div class="text-center">
+                                    <div>
+                                        <span style="font-size: 40px;color:#1a202c;">{{$product->get_rating()}}</span>
+                                        <span style="font-size: 25px;">/5</span>
+                                    </div>
 
-                                <ol class="comment-list">
-                                    <li class="comment-container">
-                                        <div class="comment-avatar">
-                                            <img src="assets/images/avatar/avatar1.jpg" width="65" height="65"
-                                                 alt="avatar"/>
-                                        </div><!-- End .comment-avatar-->
+                                        <div class="ratings-container">
+                                            <div class="product-ratings">
+                                                        <span class="ratings"
+                                                              style="width:{{$product->get_rating()*20}}%"></span>
+                                                <!-- End .ratings -->
+                                            </div><!-- End .product-ratings -->
+                                        </div><!-- End .ratings-container -->
+                                    <p class="reviews-title">{{$reviews->count()}} reviews for Product</p>
+                                </div>
+                                @foreach($reviews as $reviews)
+                                    <ol class="comment-list">
+                                        <li class="comment-container">
+                                            <div class="comment-avatar">
+                                                <img
+                                                    src="{{asset('uploads/customers/')}}{{$reviews->customer->profile ? '$reviews->customer->profile':'/avatar1.jpg'}}"
+                                                    width="65" height="65"
+                                                    alt="avatar"/>
+                                            </div><!-- End .comment-avatar-->
 
-                                        <div class="comment-box">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .ratings-container -->
+                                            <div class="comment-box">
+                                                <div class="ratings-container">
+                                                    <div class="product-ratings">
+                                                        <span class="ratings"
+                                                              style="width:{{$reviews->rating}}%"></span>
+                                                        <!-- End .ratings -->
+                                                    </div><!-- End .product-ratings -->
+                                                </div><!-- End .ratings-container -->
 
-                                            <div class="comment-info mb-1">
-                                                <h4 class="avatar-name">John Doe</h4> - <span class="comment-date">Novemeber 15, 2019</span>
-                                            </div><!-- End .comment-info -->
+                                                <div class="comment-info mb-1">
+                                                    <h4 class="avatar-name">{{$reviews->customer->full_name}}</h4> -
+                                                    <span
+                                                        class="comment-date">{{date('F d,y',strtotime($reviews->created_at))}}</span>
+                                                </div><!-- End .comment-info -->
 
-                                            <div class="comment-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip.</p>
-                                            </div><!-- End .comment-text -->
-                                        </div><!-- End .comment-box -->
-                                    </li><!-- comment-container -->
-                                </ol><!-- End .comment-list -->
+                                                <div class="comment-text">
+                                                    <p>
+                                                        {{$reviews->message}}
+                                                    </p>
+                                                </div><!-- End .comment-text -->
+                                            </div><!-- End .comment-box -->
+                                        </li><!-- comment-container -->
+                                    </ol><!-- End .comment-list -->
+                                @endforeach
                             </div>
 
                             <div class="col-xl-5">
-                                <div class="add-product-review">
-                                    <form action="{{route('review.create')}}" method="post" class="comment-form m-0 create-review">
-                                        @csrf
-                                        <h3 class="review-title">Add a Review</h3>
+                                @if($review_create && $buy)
+                                    <div class="add-product-review">
+                                        <form action="{{route('review.create')}}" method="post"
+                                              class="comment-form m-0 create-review">
+                                            @csrf
+                                            <h3 class="review-title">Add a Review</h3>
 
-                                        <div class="rating-form">
-                                            <label for="rating">Your rating</label>
-                                            <span class="rating-stars">
+                                            <div class="rating-form">
+                                                <label for="rating">Your rating</label>
+                                                <span class="rating-stars">
                                                 <a class="star-1" href="#">1</a>
                                                 <a class="star-2" href="#">2</a>
                                                 <a class="star-3" href="#">3</a>
@@ -231,24 +254,27 @@
 												<a class="star-5" href="#">5</a>
 											</span>
 
-                                            <select name="rating" id="rating" required="" style="display: none;">
-                                                <option value="">Rate…</option>
-                                                <option value="5">Perfect</option>
-                                                <option value="4">Good</option>
-                                                <option value="3">Average</option>
-                                                <option value="2">Not that bad</option>
-                                                <option value="1">Very poor</option>
-                                            </select>
-                                        </div>
+                                                <select name="rating" id="rating" required="" style="display: none;">
+                                                    <option value="">Rate…</option>
+                                                    <option value="5">Perfect</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Not that bad</option>
+                                                    <option value="1">Very poor</option>
+                                                </select>
+                                                <input type="hidden" name="product" value="{{$product->id}}">
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Your Review</label>
-                                            <textarea cols="5" rows="4" name="message" class="form-control form-control-sm"></textarea>
-                                        </div><!-- End .form-group -->
+                                            <div class="form-group">
+                                                <label for="message">Your Review</label>
+                                                <textarea id="message" cols="5" rows="4" name="message"
+                                                          class="form-control form-control-sm"></textarea>
+                                            </div><!-- End .form-group -->
 
-                                        <input type="submit" class="btn btn-dark ls-n-15" value="Submit">
-                                    </form>
-                                </div><!-- End .add-product-review -->
+                                            <input type="submit" class="btn btn-dark ls-n-15" value="Submit">
+                                        </form>
+                                    </div><!-- End .add-product-review -->
+                                @endif
                             </div>
                         </div>
                     </div><!-- End .product-reviews-content -->

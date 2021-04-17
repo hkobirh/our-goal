@@ -31,7 +31,7 @@ class FrontendProductController extends Controller
     }
 
 
-    public function load_more_data(Request $request)
+/*    public function load_more_data(Request $request)
     {
         if ($request->ajax()) {
               if ($request->id) {
@@ -41,5 +41,5 @@ class FrontendProductController extends Controller
               }
               return view('load_more_data',compact('data'));
           }
-    }
+    }*/
 }

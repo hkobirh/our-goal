@@ -19,6 +19,15 @@ class Product extends Model
     public function user(){
         return $this->belongsTo(User::class ,'create_by')->select('id','name');
     }
+    public function reviews(){
+        return $this->hasMany(ItemsReview::class,'product_id');
+    }
+    public function get_rating(){
+        $star = $this->reviews()->sum('rating');
+        if ($star == 0) return 0;
+        $avg = $star/$this->reviews()->count();
+        return $avg;
+    }
     public function getStatusAttribute($value){
         return ucfirst($value);
     }
@@ -31,4 +40,5 @@ class Product extends Model
     public function scopeInactive($query){
         return $query->where('status','inactive');
     }
+
 }

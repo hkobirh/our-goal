@@ -6,7 +6,7 @@ $(document).ready(function () {
         }
     })
 
-    $('body').on('click', '.btn-quickview', function (e) {
+    $(document).on('click', '.btn-quickview', function (e) {
         e.preventDefault();
         $('.bd-example-modal-lg').modal('show');
         let url = $(this).attr('href');
@@ -84,9 +84,42 @@ $(document).ready(function () {
 
 
 //Review for product==========================
-    $(document).on('click', '.create-review', function (e) {
+
+    $(document).on('submit', '.create-review', function (e) {
         e.preventDefault();
-        console.log('Ok')
+        $.ajax({
+            url:$(this).attr('action'),
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function (data) {
+                if ($.isEmptyObject(data.error)) {
+                    $('.create-review')[0].reset();
+                    $('.rating-stars a').removeClass('active');
+                    toastr.success(data.success);
+                } else {
+                    showErrorMessage(data.error)
+                }
+            }
+        })
+    })
+
+//Load more product data============================
+
+    load_more_data();
+    function load_more_data(id=""){
+        $.ajax({
+            url: '',
+            type: 'post',
+            data:{id:id},
+            success: function (data){
+               /* $('#loadMoreBtn').remove();*/
+                $('#more-product').append(data);
+            }
+        })
+    }
+    $('body').on('click','#loadMoreBtn',function (){
+        let id = $(this).data('id');
+        load_more_data(id);
     })
 
 })

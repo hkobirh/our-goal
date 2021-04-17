@@ -20,7 +20,7 @@ class ItemsReviewSeeder extends Seeder
                 "product_id"  => rand(1, 500),
                 "rating"      => rand(1, 5),
                 "message"     => "message",
-                "status"      => "hidden"
+                "status"      => array_rand(["visible"=>"visible","hidden"=>"hidden"],1)
             ]);
         }
     }

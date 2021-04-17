@@ -68,9 +68,7 @@ class CartController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function show($id)
     {
@@ -79,9 +77,7 @@ class CartController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function edit($id)
     {
@@ -155,7 +151,8 @@ class CartController extends Controller
         return view('frontend.cart.get_cart_data');
     }
 
-    public function ajax_cart_clear(){
+    public function ajax_cart_clear()
+    {
         if( request()->ajax()){
             Cart::clear();
 

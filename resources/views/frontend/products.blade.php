@@ -36,11 +36,11 @@
             </nav>
             <div class="row">
                 <div class="col-lg-9 main-content">
-                    <div class="row">
+                    <div class="row" id="getMoreProduct">
                         @foreach($products as $product)
                             @php($s_price = false)
-                           @if($product->special_price_from <= date('Y-m-d') && $product->special_price_to >= date('Y-m-d'))
-                               @php($s_price = true)
+                            @if($product->special_price_from <= date('Y-m-d') && $product->special_price_to >= date('Y-m-d'))
+                                @php($s_price = true)
                             @endif
                             <div class="col-6 col-sm-4 col-md-3" id="product_data">
                                 <div class="product-default inner-quickview inner-icon">
@@ -50,7 +50,7 @@
                                         </a>
                                         <div class="label-group">
                                             @if($s_price)
-                                            <div class="product-label label-sale">-20%</div>
+                                                <div class="product-label label-sale">-20%</div>
                                             @endif
                                         </div>
                                         <div class="btn-icon-group">
@@ -88,8 +88,8 @@
                                 </div>
                             </div><!-- End .col-sm-4 -->
                         @endforeach
+                            <button class="btn btn-info" id="loadMoreBtn">Load more</button>
                     </div>
-                    <button class="btn btn-info" id="loadMoreBtn">Load more</button>
                 </div><!-- End .col-lg-9 -->
 
                 <div class="sidebar-overlay"></div>
@@ -212,9 +212,15 @@
 
 @endsection
 
-
-@push('js')
+<!-- For load m -->
+@push('JS')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
         load_more_data();
         function load_more_data(id=""){
             $.ajax({

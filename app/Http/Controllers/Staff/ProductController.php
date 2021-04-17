@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use Exception;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {

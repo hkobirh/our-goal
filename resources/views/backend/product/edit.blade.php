@@ -157,7 +157,7 @@
                                                placeholder="Enter Your Warranty Duration"/>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label>Warranty Conditions</label>
+                                        <label for="texteditor">Warranty Conditions</label>
                                         <textarea id="texteditor" name="warranty_conditions" class="texteditor"
                                                   placeholder="Product Warranty Conditions">{!! $product->warranty_conditions !!} </textarea>
                                     </div>
