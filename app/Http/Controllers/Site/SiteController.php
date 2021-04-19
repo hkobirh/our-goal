@@ -57,6 +57,7 @@ class SiteController extends Controller
     {
         $product       = Product::with('reviews')->where('slug', $slug)->first();
         $reviews       = ItemsReview::with('customer')->where('product_id', $product->id)->orderBy('id', 'DESC')->get();
+
         $buy           = $this->is_buy($product->id);
         $review_create = $this->review_create($product->id);
 
@@ -76,7 +77,7 @@ class SiteController extends Controller
             $orders = Order::where('customer_id', $customer)->get();
             if ($orders) {
                 foreach ($orders as $order) {
-                    return (bool)OrderInfo::where('order_id', $order->id)->where('product_id', $product);
+                    return !(bool)OrderInfo::where('order_id', $order->id)->where('product_id', $product);
                 }
 
             } else {
